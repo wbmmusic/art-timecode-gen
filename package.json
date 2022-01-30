@@ -1,38 +1,90 @@
 {
-  "name": "art-timecode-gen",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "art-timecode-gen",
+    "version": "0.0.1",
+    "author": "Marece Williams",
+    "description": "ArtNet Timecode Generator",
+    "homepage": "./",
+    "main": "public/main.js",
+    "private": true,
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.16.1",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.5.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "5.0.0",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "electron": "electron .",
+        "dev": "nf start",
+        "install": "electron-rebuild",
+        "rebuild": "electron-rebuild -f",
+        "package": "electron-builder build -c.extraMetadata.main=build/main.js --publish never",
+        "deploy": "electron-builder build -c.extraMetadata.main=build/main.js --publish always",
+        "backup": "git add . && git commit -m %NPM_PACKAGE_VERSION% && git push origin main",
+        "upload": "yarn build && yarn backup && yarn deploy ",
+        "mac": "yarn && yarn build && node copyPlist.js  && yarn deploy",
+        "try": "yarn build && yarn package ",
+        "refresh": "yarn upgrade --latest && yarn rebuild"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "build": {
+        "productName": "artTimecode Gen",
+        "appId": "com.wbm.arttimecodegen",
+        "copyright": "WBM Tek",
+        "extends": null,
+        "npmRebuild": false,
+        "afterSign": "./notarize.js",
+        "files": [
+            "build/**/*",
+            "electron/*"
+        ],
+        "mac": {
+            "icon": "public/icon.icns",
+            "hardenedRuntime": true,
+            "gatekeeperAssess": false,
+            "entitlements": "build/entitlements.mac.plist",
+            "entitlementsInherit": "build/entitlements.mac.plist"
+        },
+        "dmg": {
+            "icon": "public/dmg.icns",
+            "sign": false
+        },
+        "win": {
+            "icon": "public/icon.ico"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wbmmusic/dn-bridge.git"
+    },
+    "devDependencies": {
+        "electron": "^16.0.8",
+        "electron-builder": "^22.14.5",
+        "electron-notarize": "^1.1.1",
+        "electron-rebuild": "^3.2.7",
+        "foreman": "^3.0.1"
+    }
 }
