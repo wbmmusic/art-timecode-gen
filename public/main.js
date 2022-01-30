@@ -1,30 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const { join } = require('path')
+const { fork } = require('child_process')
 const URL = require('url')
 const { autoUpdater } = require('electron-updater');
-const { networkInterfaces } = require('os')
-const { existsSync, writeFileSync, readFileSync } = require('fs');
-const { fork } = require('child_process');
-const { EventEmitter } = require('events');
-const myEmitter = new EventEmitter();
 
 let win
-let activeInterface = null
-
-const pathToConfigFile = (join(app.getPath('userData'), 'config.json'))
-let config = {}
-const defaultConfig = { venueIP: '', interface: { name: '', address: '' } }
-
-const saveConfig = (data) => {
-    writeFileSync(pathToConfigFile, JSON.stringify(data, null, '\t'))
-    config = JSON.parse(readFileSync(pathToConfigFile))
-}
-
-if (!existsSync(pathToConfigFile)) {
-    saveConfig(defaultConfig)
-    console.log("Created Config File")
-} else config = JSON.parse(readFileSync(pathToConfigFile))
-
 
 // SECOND INSTANCE
 const gotTheLock = app.requestSingleInstanceLock()
@@ -41,18 +21,18 @@ else {
 // END SECOND INSTANCE
 
 
-const artNet = fork(join(__dirname, 'artNet.js'), { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] })
+const artNet = fork(join(__dirname, 'artNetTc.js'), { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] })
 artNet.stdout.pipe(process.stdout)
 artNet.stderr.pipe(process.stdout)
 
 const createWindow = () => {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 950,
-        height: 500,
+        width: 350,
+        height: 150,
         autoHideMenuBar: true,
         show: false,
-        title: 'DN bridge ' + app.getVersion(),
+        title: 'ArtTimecode Gen v' + app.getVersion(),
         webPreferences: {
             preload: join(__dirname, 'preload.js')
         }
@@ -72,31 +52,14 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
-
     artNet.on('message', (msg) => {
         switch (msg.cmd) {
-            case 'universes':
-                let out = []
-                msg.universes.forEach(element => out.push(element.data || []));
+            case 'time':
                 try {
-                    win.webContents.send('universes', out)
+                    win.webContents.send('time', msg.clock)
                 } catch (error) {
 
                 }
-                break;
-
-            case 'startResult':
-                if (msg.error) {
-                    console.log('start error', msg.error);
-                    myEmitter.emit('startResult', msg)
-                } else myEmitter.emit('startResult', msg)
-                break;
-
-            case 'sendToVenueResult':
-                if (msg.error) {
-                    console.log('start error', msg.error);
-                    myEmitter.emit('sendToVenueResult', msg)
-                } else myEmitter.emit('sendToVenueResult', msg)
                 break;
 
             default:
@@ -104,42 +67,13 @@ app.on('ready', () => {
         }
     });
     artNet.on('error', (err) => { console.log(err); })
-    artNet.on('close', (err, msg) => { console.log(err, msg); })
+    artNet.on('close', (err, msg) => { console.log('CLOSED', err, msg); })
 
-    const startUDP = async() => {
-        console.log("IN START UDP");
-        return new Promise(async(resolve, reject) => {
-            const handleResult = (msg) => {
-                myEmitter.removeListener('startResult', handleResult)
-                if (msg.error) reject(msg.error)
-                resolve(msg.result)
-            }
-
-            setTimeout(() => {
-                myEmitter.removeListener('startResult', handleResult)
-                reject('start UDP timed out')
-            }, 5000);
-
-            myEmitter.on('startResult', handleResult)
-
-            artNet.send({ cmd: 'start', config })
-        })
-    }
-
-    const runServer = async() => {
-        try {
-            const result = await startUDP()
-            activeInterface = result
-            console.log('Run Server Result', result);
-        } catch (error) {
-            throw error
-        }
-    }
-
-    if (networkInterfaces()[config.interface.name] !== undefined) {
-        const theIface = networkInterfaces()[config.interface.name].find(ifa => ifa.address === config.interface.address)
-        if (theIface !== undefined) runServer()
-    }
+    ipcMain.handle('consoleAddress', (e, address) => {
+        console.log('Console Address In Main', address)
+        artNet.send({ cmd: 'consoleAddress', address })
+        return true
+    })
 
     ipcMain.on('reactIsReady', () => {
         //console.log('React Is Ready')
@@ -165,72 +99,11 @@ app.on('ready', () => {
 
     createWindow()
 
-    ipcMain.handle('getInterface', () => activeInterface)
-    ipcMain.handle('getNetworkInterfaces', () => networkInterfaces())
-    ipcMain.handle('getVenueIP', () => config.venueIP)
-    ipcMain.handle('setInterface', async(e, data) => {
-        return new Promise(async(resolve, reject) => {
-            let tempConfig = config
-            tempConfig.interface = data
-            saveConfig(tempConfig)
-            try {
-                const result = await startUDP()
-                console.log('Result in setInterface', result);
-                activeInterface = result
-                resolve(activeInterface)
-            } catch (error) {
-                reject(error)
-            }
-        })
-
-    })
-
-    ipcMain.handle('setShowUniverses', (e, state) => {
-        if (state) {
-            artNet.send({ cmd: 'sendUniverses', value: true })
-            return true
-        } else {
-            artNet.send({ cmd: 'sendUniverses', value: false })
-            return false
-        }
-    })
-
-    const sendToVenue = async(yesNo, address) => {
-        console.log("Send To Venue", yesNo, address);
-        return new Promise(async(resolve, reject) => {
-            if (yesNo) {
-                let tempConfig = config
-                tempConfig.venueIP = address
-                saveConfig(tempConfig)
-            }
-
-            const handleSendToVenueResult = (msg) => {
-                console.log("MESSAGE HERE", msg);
-                myEmitter.removeListener('sendToVenueResult', handleSendToVenueResult)
-                resolve(msg.data)
-            }
-
-            setTimeout(() => {
-                myEmitter.removeListener('sendToVenueResult', handleSendToVenueResult)
-                reject('sendToVenue Timed Out')
-            }, 1000);
-
-            myEmitter.on('sendToVenueResult', handleSendToVenueResult)
-
-            artNet.send({ cmd: 'sendToVenue', value: yesNo, config })
-        })
-    }
-
-    ipcMain.handle('runSystem', async(e, address) => await sendToVenue(true, address))
-    ipcMain.handle('stopSystem', async() => await sendToVenue(false))
-
     app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow() })
-
 })
 
 app.on('will-quit', () => artNet.kill('SIGKILL'))
-
-// Quit when all windows are closed.
+    // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
