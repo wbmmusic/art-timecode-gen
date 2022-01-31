@@ -75,7 +75,6 @@
             "entitlementsInherit": "build/entitlements.mac.plist"
         },
         "dmg": {
-            "icon": "public/dmg.icns",
             "sign": false
         },
         "win": {
