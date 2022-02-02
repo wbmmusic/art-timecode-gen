@@ -22,11 +22,18 @@ const header = Buffer.concat([id, opCode, protVer, filler])
 
 let count = 0;
 
-let hours = 0;
-let mins = 59
-let secs = 58;
+let hours = 23;
+let mins = 9
+let secs = 56;
 let frames = 0
 let framerate = 30
+
+const delays = {
+    24: '41666u',
+    25: '40m',
+    29.97: '33333u',
+    30: '33333u'
+}
 
 const makeTypeByte = () => {
     switch (framerate) {
@@ -57,7 +64,7 @@ const addZero = (num) => {
 }
 
 const makeClock = () => {
-    frames++
+
     if (frames >= framerate) {
         frames = 0
         secs++
@@ -66,27 +73,49 @@ const makeClock = () => {
     if (secs > 59) {
         secs = 0
         mins++
+
+        ////////////////////////////////////  This isnt handled right.. well almost... what if we start at 0:0:0:0 or 10:0:0:0..
+        if (framerate === 29.97) {
+            if (mins % 10 === 0) {
+                console.log('Devisible by ten');
+            } else {
+                console.log('Dropped Frames');
+                frames = 2;
+            }
+        }
+
     }
+
+
 
     if (mins > 59) {
         mins = 0
         hours++
     }
-    const time = `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`
+
+    if (hours > 23) hours = 0
+
+    frames++
+
+    const time = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
     if (consoleAddress !== '') sender.send(Buffer.concat([header, makeTimeBytes()]), 6454, consoleAddress)
     return time
 }
 
-const liftOff = (dummy) => {
+const nextFrame = (dummy) => {
     const clock = makeClock(count)
     process.send({ cmd: 'time', clock })
-        //console.log(clock);
     count++
 }
 
-timerA.setInterval(liftOff, '', '33333u', function() {
-    //timerA.clearInterval();
-});
+const setFrameRate = (rate) => {
+    timerA.clearInterval();
+    framerate = rate
+    timerA.setInterval(nextFrame, '', delays[framerate], function() {
+        //timerA.clearInterval();
+    });
+    return framerate
+}
 
 process.on('message', (msg) => {
     console.log('Child got a message');
@@ -95,6 +124,15 @@ process.on('message', (msg) => {
         case 'consoleAddress':
             console.log('Console Address In Child');
             consoleAddress = msg.address
+            break;
+
+        case 'speed':
+            console.log('Speed Change');
+            break;
+
+        case 'rate':
+            console.log('Rate Change');
+            process.send({ cmd: 'rate', rate: setFrameRate(msg.rate) })
             break;
 
         default:

@@ -1,8 +1,12 @@
+import { Button, ButtonGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 export default function Top() {
   const [theTime, setTheTime] = useState("00:00:00:00");
   const [consoleAddress, setConsoleAddress] = useState("");
+  const [frameRate, setFrameRate] = useState(30);
+  const [speed, setSpeed] = useState(1);
+  const [state, setState] = useState("run");
 
   useEffect(() => {
     window.electron.receive("time", time => setTheTime(time));
@@ -58,6 +62,14 @@ export default function Top() {
     return true;
   };
 
+  const handleChangeFrameRate = rate => {
+    if (rate === frameRate) return;
+    window.electron.ipcRenderer
+      .invoke("frameRate", rate)
+      .then(res => setFrameRate(res))
+      .catch(err => console.log(err));
+  };
+
   return (
     <div
       style={{
@@ -71,7 +83,9 @@ export default function Top() {
         fontWeight: "bold",
       }}
     >
-      <div>{theTime} 30fps</div>
+      <div>
+        {theTime.time} {theTime.rate}fps
+      </div>
       <div style={{ fontSize: "16px", fontWeight: "normal" }}>
         Consoles artNet IP:
         <input
@@ -90,8 +104,95 @@ export default function Top() {
               .catch(err => console.error(err));
           }}
         >
-          Send
+          Output
         </button>
+        <div>
+          <ButtonGroup size="small" variant="contained">
+            <Button
+              color={state === "stop" ? "secondary" : "primary"}
+              onClick={() => setState("stop")}
+            >
+              Stop
+            </Button>
+            <Button
+              color={state === "run" ? "secondary" : "primary"}
+              onClick={() => setState("run")}
+            >
+              Run
+            </Button>
+          </ButtonGroup>
+        </div>
+        <div style={{ border: "1px solid black", padding: "10px" }}>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "16px",
+              fontWeight: "normal",
+            }}
+          >
+            Speed
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <ButtonGroup variant="contained" size="small">
+              <Button
+                color={speed === 0.5 ? "secondary" : "primary"}
+                onClick={() => setSpeed(0.5)}
+              >
+                .5x
+              </Button>
+              <Button
+                color={speed === 1 ? "secondary" : "primary"}
+                onClick={() => setSpeed(1)}
+              >
+                1x
+              </Button>
+              <Button
+                color={speed === 2 ? "secondary" : "primary"}
+                onClick={() => setSpeed(2)}
+              >
+                2x
+              </Button>
+            </ButtonGroup>
+          </div>
+        </div>
+
+        <div style={{ border: "1px solid black", padding: "10px" }}>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "16px",
+              fontWeight: "normal",
+            }}
+          >
+            Frame Rate
+          </div>
+          <ButtonGroup variant="contained" size="small">
+            <Button
+              color={frameRate === 24 ? "secondary" : "primary"}
+              onClick={() => handleChangeFrameRate(24)}
+            >
+              24
+            </Button>
+            <Button
+              color={frameRate === 25 ? "secondary" : "primary"}
+              onClick={() => handleChangeFrameRate(25)}
+            >
+              25
+            </Button>
+            <Button
+              color={frameRate === 29.97 ? "secondary" : "primary"}
+              onClick={() => handleChangeFrameRate(29.97)}
+            >
+              29.97
+            </Button>
+            <Button
+              color={frameRate === 30 ? "secondary" : "primary"}
+              onClick={() => handleChangeFrameRate(30)}
+            >
+              30
+            </Button>
+          </ButtonGroup>
+        </div>
       </div>
     </div>
   );

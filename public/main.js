@@ -3,6 +3,9 @@ const { join } = require('path')
 const { fork } = require('child_process')
 const URL = require('url')
 const { autoUpdater } = require('electron-updater');
+const EventEmitter = require('events');
+const myEmitter = new EventEmitter();
+
 
 let win
 
@@ -29,7 +32,7 @@ const createWindow = () => {
     // Create the browser window.
     win = new BrowserWindow({
         width: 350,
-        height: 150,
+        height: 350,
         autoHideMenuBar: true,
         show: false,
         title: 'ArtTimecode Gen v' + app.getVersion(),
@@ -60,6 +63,10 @@ app.on('ready', () => {
                 } catch (error) {
 
                 }
+                break;
+
+            case 'rate':
+                myEmitter.emit('rate', msg.rate)
                 break;
 
             default:
@@ -95,6 +102,26 @@ app.on('ready', () => {
             setInterval(() => autoUpdater.checkForUpdates(), 1000 * 60 * 60);
         }
 
+    })
+
+    const setRate = (rate) => {
+        return new Promise(async(resolve, reject) => {
+
+            const handleRate = (rate) => {
+                myEmitter.removeListener('rate', handleRate)
+                resolve(rate)
+            }
+
+            myEmitter.on('rate', handleRate)
+
+
+            artNet.send({ cmd: 'rate', rate })
+        })
+    }
+
+    ipcMain.handle('frameRate', async(e, rate) => {
+        console.log('Rate Set to', rate);
+        return await setRate(rate)
     })
 
     createWindow()
