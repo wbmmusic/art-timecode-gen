@@ -78,133 +78,149 @@ export default function Top() {
       .catch(err => console.log(err));
   };
 
+  const RunStop = () => (
+    <div style={{ textAlign: "center", paddingBottom: "5px" }}>
+      <ButtonGroup variant="contained" size="small">
+        <Button
+          color={state === "stop" ? "error" : "primary"}
+          onClick={() => handleStateChange("stop")}
+        >
+          Stop
+        </Button>
+        <Button
+          color={state === "run" ? "success" : "primary"}
+          onClick={() => handleStateChange("run")}
+        >
+          Run
+        </Button>
+      </ButtonGroup>
+    </div>
+  );
+
+  const Speed = () => (
+    <div style={{ borderTop: "1px solid black", padding: "5px" }}>
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "16px",
+          fontWeight: "normal",
+        }}
+      >
+        Speed
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <ButtonGroup variant="contained" size="small">
+          <Button
+            color={speed === 0.5 ? "success" : "primary"}
+            onClick={() => handleSpeedChange(0.5)}
+          >
+            .5x
+          </Button>
+          <Button
+            color={speed === 1 ? "success" : "primary"}
+            onClick={() => handleSpeedChange(1)}
+          >
+            1x
+          </Button>
+          <Button
+            color={speed === 2 ? "success" : "primary"}
+            onClick={() => handleSpeedChange(2)}
+          >
+            2x
+          </Button>
+        </ButtonGroup>
+      </div>
+    </div>
+  );
+
+  const FrameRate = () => (
+    <div
+      style={{
+        borderTop: "1px solid black",
+        padding: "5px",
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "16px",
+          fontWeight: "normal",
+        }}
+      >
+        Frame Rate
+      </div>
+      <ButtonGroup variant="contained" size="small">
+        <Button
+          color={frameRate === 24 ? "success" : "primary"}
+          onClick={() => handleChangeFrameRate(24)}
+        >
+          24
+        </Button>
+        <Button
+          color={frameRate === 25 ? "success" : "primary"}
+          onClick={() => handleChangeFrameRate(25)}
+        >
+          25
+        </Button>
+        <Button
+          color={frameRate === 29.97 ? "success" : "primary"}
+          onClick={() => handleChangeFrameRate(29.97)}
+        >
+          29.97
+        </Button>
+        <Button
+          color={frameRate === 30 ? "success" : "primary"}
+          onClick={() => handleChangeFrameRate(30)}
+        >
+          30
+        </Button>
+      </ButtonGroup>
+    </div>
+  );
+
+  const Console = () => (
+    <div>
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: "normal",
+          padding: "10px",
+          borderTop: "1px solid black",
+        }}
+      >
+        Consoles artNet IP:
+        <input
+          style={{ width: "120px", marginLeft: "10px" }}
+          value={consoleAddress}
+          onChange={handleConsoleAddress}
+        />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <Button
+          size="small"
+          disabled={!ipIsValid(consoleAddress)}
+          variant="contained"
+          onClick={() => {
+            window.electron.ipcRenderer
+              .invoke("consoleAddress", consoleAddress)
+              .then(res => console.log(res))
+              .catch(err => console.error(err));
+          }}
+        >
+          Output
+        </Button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="theBody">
       <Clock />
-      <div>
-        <div style={{ textAlign: "center", paddingBottom: "5px" }}>
-          <ButtonGroup variant="contained" size="small">
-            <Button
-              color={state === "stop" ? "error" : "primary"}
-              onClick={() => handleStateChange("stop")}
-            >
-              Stop
-            </Button>
-            <Button
-              color={state === "run" ? "success" : "primary"}
-              onClick={() => handleStateChange("run")}
-            >
-              Run
-            </Button>
-          </ButtonGroup>
-        </div>
-        <div style={{ borderTop: "1px solid black", padding: "5px" }}>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "16px",
-              fontWeight: "normal",
-            }}
-          >
-            Speed
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <ButtonGroup variant="contained" size="small">
-              <Button
-                color={speed === 0.5 ? "success" : "primary"}
-                onClick={() => handleSpeedChange(0.5)}
-              >
-                .5x
-              </Button>
-              <Button
-                color={speed === 1 ? "success" : "primary"}
-                onClick={() => handleSpeedChange(1)}
-              >
-                1x
-              </Button>
-              <Button
-                color={speed === 2 ? "success" : "primary"}
-                onClick={() => handleSpeedChange(2)}
-              >
-                2x
-              </Button>
-            </ButtonGroup>
-          </div>
-        </div>
-        <div
-          style={{
-            borderTop: "1px solid black",
-            padding: "5px",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "16px",
-              fontWeight: "normal",
-            }}
-          >
-            Frame Rate
-          </div>
-          <ButtonGroup variant="contained" size="small">
-            <Button
-              color={frameRate === 24 ? "success" : "primary"}
-              onClick={() => handleChangeFrameRate(24)}
-            >
-              24
-            </Button>
-            <Button
-              color={frameRate === 25 ? "success" : "primary"}
-              onClick={() => handleChangeFrameRate(25)}
-            >
-              25
-            </Button>
-            <Button
-              color={frameRate === 29.97 ? "success" : "primary"}
-              onClick={() => handleChangeFrameRate(29.97)}
-            >
-              29.97
-            </Button>
-            <Button
-              color={frameRate === 30 ? "success" : "primary"}
-              onClick={() => handleChangeFrameRate(30)}
-            >
-              30
-            </Button>
-          </ButtonGroup>
-        </div>
-        <div
-          style={{
-            fontSize: "16px",
-            fontWeight: "normal",
-            padding: "10px",
-            borderTop: "1px solid black",
-          }}
-        >
-          Consoles artNet IP:
-          <input
-            style={{ width: "120px", marginLeft: "10px" }}
-            value={consoleAddress}
-            onChange={handleConsoleAddress}
-          />
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <Button
-            size="small"
-            disabled={!ipIsValid(consoleAddress)}
-            variant="contained"
-            onClick={() => {
-              window.electron.ipcRenderer
-                .invoke("consoleAddress", consoleAddress)
-                .then(res => console.log(res))
-                .catch(err => console.error(err));
-            }}
-          >
-            Output
-          </Button>
-        </div>
-      </div>
+      <RunStop />
+      <Speed />
+      <FrameRate />
+      <Console />
     </div>
   );
 }
