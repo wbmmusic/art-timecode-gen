@@ -82,13 +82,13 @@ export default function Top() {
     <div style={{ textAlign: "center", paddingBottom: "5px" }}>
       <ButtonGroup variant="contained" size="small">
         <Button
-          color={state === "stop" ? "error" : "primary"}
+          color={state === "stop" ? "warning" : "error"}
           onClick={() => handleStateChange("stop")}
         >
           Stop
         </Button>
         <Button
-          color={state === "run" ? "success" : "primary"}
+          color={state === "run" ? "warning" : "success"}
           onClick={() => handleStateChange("run")}
         >
           Run
@@ -111,19 +111,19 @@ export default function Top() {
       <div style={{ textAlign: "center" }}>
         <ButtonGroup variant="contained" size="small">
           <Button
-            color={speed === 0.5 ? "success" : "primary"}
+            color={speed === 0.5 ? "warning" : "primary"}
             onClick={() => handleSpeedChange(0.5)}
           >
             .5x
           </Button>
           <Button
-            color={speed === 1 ? "success" : "primary"}
+            color={speed === 1 ? "warning" : "primary"}
             onClick={() => handleSpeedChange(1)}
           >
             1x
           </Button>
           <Button
-            color={speed === 2 ? "success" : "primary"}
+            color={speed === 2 ? "warning" : "primary"}
             onClick={() => handleSpeedChange(2)}
           >
             2x
@@ -152,65 +152,30 @@ export default function Top() {
       </div>
       <ButtonGroup variant="contained" size="small">
         <Button
-          color={frameRate === 24 ? "success" : "primary"}
+          color={frameRate === 24 ? "warning" : "primary"}
           onClick={() => handleChangeFrameRate(24)}
         >
           24
         </Button>
         <Button
-          color={frameRate === 25 ? "success" : "primary"}
+          color={frameRate === 25 ? "warning" : "primary"}
           onClick={() => handleChangeFrameRate(25)}
         >
           25
         </Button>
         <Button
-          color={frameRate === 29.97 ? "success" : "primary"}
+          color={frameRate === 29.97 ? "warning" : "primary"}
           onClick={() => handleChangeFrameRate(29.97)}
         >
           29.97
         </Button>
         <Button
-          color={frameRate === 30 ? "success" : "primary"}
+          color={frameRate === 30 ? "warning" : "primary"}
           onClick={() => handleChangeFrameRate(30)}
         >
           30
         </Button>
       </ButtonGroup>
-    </div>
-  );
-
-  const Console = () => (
-    <div>
-      <div
-        style={{
-          fontSize: "16px",
-          fontWeight: "normal",
-          padding: "10px",
-          borderTop: "1px solid black",
-        }}
-      >
-        Consoles artNet IP:
-        <input
-          style={{ width: "120px", marginLeft: "10px" }}
-          value={consoleAddress}
-          onChange={handleConsoleAddress}
-        />
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <Button
-          size="small"
-          disabled={!ipIsValid(consoleAddress)}
-          variant="contained"
-          onClick={() => {
-            window.electron.ipcRenderer
-              .invoke("consoleAddress", consoleAddress)
-              .then(res => console.log(res))
-              .catch(err => console.error(err));
-          }}
-        >
-          Output
-        </Button>
-      </div>
     </div>
   );
 
@@ -220,7 +185,38 @@ export default function Top() {
       <RunStop />
       <Speed />
       <FrameRate />
-      <Console />
+      <div>
+        <div
+          style={{
+            fontSize: "16px",
+            fontWeight: "normal",
+            padding: "10px",
+            borderTop: "1px solid black",
+          }}
+        >
+          Consoles artNet IP:
+          <input
+            style={{ width: "120px", marginLeft: "10px" }}
+            value={consoleAddress}
+            onChange={handleConsoleAddress}
+          />
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <Button
+            size="small"
+            disabled={!ipIsValid(consoleAddress)}
+            variant="contained"
+            onClick={() => {
+              window.electron.ipcRenderer
+                .invoke("consoleAddress", consoleAddress)
+                .then(res => console.log(res))
+                .catch(err => console.error(err));
+            }}
+          >
+            Output
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
