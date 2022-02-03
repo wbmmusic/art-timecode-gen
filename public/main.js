@@ -69,6 +69,14 @@ app.on('ready', () => {
                 myEmitter.emit('rate', msg.rate)
                 break;
 
+            case 'state':
+                myEmitter.emit('state', msg.state)
+                break;
+
+            case 'speed':
+                myEmitter.emit('speed', msg.speed)
+                break;
+
             default:
                 break;
         }
@@ -104,12 +112,12 @@ app.on('ready', () => {
 
     })
 
-    const setRate = (rate) => {
+    const setRate = async(rate) => {
         return new Promise(async(resolve, reject) => {
 
-            const handleRate = (rate) => {
+            const handleRate = (newRate) => {
                 myEmitter.removeListener('rate', handleRate)
-                resolve(rate)
+                resolve(newRate)
             }
 
             myEmitter.on('rate', handleRate)
@@ -119,9 +127,46 @@ app.on('ready', () => {
         })
     }
 
+    const setState = async(state) => {
+        return new Promise(async(resolve, reject) => {
+
+            const handleState = (newState) => {
+                myEmitter.removeListener('state', handleState)
+                resolve(newState)
+            }
+
+            myEmitter.on('state', handleState)
+
+
+            artNet.send({ cmd: 'state', state })
+        })
+    }
+
+    const setSpeed = async(speed) => {
+        return new Promise(async(resolve, reject) => {
+
+            const handleSpeed = (newSpeed) => {
+                myEmitter.removeListener('speed', handleSpeed)
+                resolve(newSpeed)
+            }
+
+            myEmitter.on('speed', handleSpeed)
+
+            artNet.send({ cmd: 'speed', speed })
+        })
+    }
+
     ipcMain.handle('frameRate', async(e, rate) => {
         console.log('Rate Set to', rate);
         return await setRate(rate)
+    })
+
+    ipcMain.handle('state', async(e, state) => {
+        return await setState(state)
+    })
+
+    ipcMain.handle('speed', async(e, speed) => {
+        return await setSpeed(speed)
     })
 
     createWindow()

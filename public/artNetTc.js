@@ -28,6 +28,10 @@ let secs = 56;
 let frames = 0
 let framerate = 30
 
+let running = false
+let output = false
+let speed = 1
+
 const delays = {
     24: '41666u',
     25: '40m',
@@ -98,7 +102,7 @@ const makeClock = () => {
     frames++
 
     const time = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
-    if (consoleAddress !== '') sender.send(Buffer.concat([header, makeTimeBytes()]), 6454, consoleAddress)
+    if (consoleAddress !== '' && output) sender.send(Buffer.concat([header, makeTimeBytes()]), 6454, consoleAddress)
     return time
 }
 
@@ -108,12 +112,22 @@ const nextFrame = (dummy) => {
     count++
 }
 
-const setFrameRate = (rate) => {
-    timerA.clearInterval();
-    framerate = rate
+const stopTimer = () => {
+    running = false
+    timerA.clearInterval()
+}
+
+const startTimer = () => {
+    stopTimer()
+    running = true
     timerA.setInterval(nextFrame, '', delays[framerate], function() {
         //timerA.clearInterval();
     });
+}
+
+const setFrameRate = (rate) => {
+    framerate = rate
+    if (running) startTimer()
     return framerate
 }
 
@@ -127,12 +141,24 @@ process.on('message', (msg) => {
             break;
 
         case 'speed':
-            console.log('Speed Change');
+            console.log('Speed Change', msg.speed);
+            speed = msg.speed
+            process.send({ cmd: 'speed', speed })
             break;
 
         case 'rate':
             console.log('Rate Change');
             process.send({ cmd: 'rate', rate: setFrameRate(msg.rate) })
+            break;
+
+        case 'state':
+            console.log('state Command', msg.state);
+            if (msg.state === 'run') {
+                startTimer()
+            } else if (msg.state === 'stop') {
+                stopTimer()
+            }
+            process.send({ cmd: 'state', state: msg.state })
             break;
 
         default:

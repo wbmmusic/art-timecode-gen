@@ -2,11 +2,11 @@ import { Button, ButtonGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 export default function Top() {
-  const [theTime, setTheTime] = useState("00:00:00:00");
+  const [theTime, setTheTime] = useState({ time: "00:00:00:00" });
   const [consoleAddress, setConsoleAddress] = useState("");
   const [frameRate, setFrameRate] = useState(30);
   const [speed, setSpeed] = useState(1);
-  const [state, setState] = useState("run");
+  const [state, setState] = useState("stop");
 
   useEffect(() => {
     window.electron.receive("time", time => setTheTime(time));
@@ -70,6 +70,61 @@ export default function Top() {
       .catch(err => console.log(err));
   };
 
+  const handleStateChange = newState => {
+    if (newState === state) return;
+    window.electron.ipcRenderer
+      .invoke("state", newState)
+      .then(res => setState(res))
+      .catch(err => console.log(err));
+  };
+
+  const handleSpeedChange = newSpeed => {
+    if (newSpeed === speed) return;
+    window.electron.ipcRenderer
+      .invoke("speed", newSpeed)
+      .then(res => setSpeed(res))
+      .catch(err => console.log(err));
+  };
+
+  const digitDivStyle = {
+    width: "32px",
+    textAlign: "center",
+  };
+
+  const makeClock = () => {
+    let timeArray = theTime.time.split(":");
+
+    return (
+      <div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "end",
+            padding: "5px",
+            backgroundColor: "black",
+            color: "limeGreen",
+            fontFamily: "Courier New, monospace",
+          }}
+        >
+          <div style={digitDivStyle}>{timeArray[0]}</div>
+          <div>:</div>
+          <div style={digitDivStyle}>{timeArray[1]}</div>
+          <div>:</div>
+          <div style={digitDivStyle}>{timeArray[2]}</div>
+          <div>:</div>
+          <div style={digitDivStyle}>{timeArray[3]}</div>
+          <div
+            style={{
+              marginLeft: "10px",
+              fontSize: "16px",
+              fontWeight: "normal",
+            }}
+          >{`${frameRate}fps`}</div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div
       style={{
@@ -83,46 +138,25 @@ export default function Top() {
         fontWeight: "bold",
       }}
     >
+      {makeClock()}
       <div>
-        {theTime.time} {theTime.rate}fps
-      </div>
-      <div style={{ fontSize: "16px", fontWeight: "normal" }}>
-        Consoles artNet IP:
-        <input
-          style={{ width: "120px" }}
-          value={consoleAddress}
-          onChange={handleConsoleAddress}
-        />
-      </div>
-      <div>
-        <button
-          disabled={!ipIsValid(consoleAddress)}
-          onClick={() => {
-            window.electron.ipcRenderer
-              .invoke("consoleAddress", consoleAddress)
-              .then(res => console.log(res))
-              .catch(err => console.error(err));
-          }}
-        >
-          Output
-        </button>
-        <div>
-          <ButtonGroup size="small" variant="contained">
+        <div style={{ textAlign: "center", paddingBottom: "5px" }}>
+          <ButtonGroup variant="contained" size="small">
             <Button
-              color={state === "stop" ? "secondary" : "primary"}
-              onClick={() => setState("stop")}
+              color={state === "stop" ? "error" : "primary"}
+              onClick={() => handleStateChange("stop")}
             >
               Stop
             </Button>
             <Button
-              color={state === "run" ? "secondary" : "primary"}
-              onClick={() => setState("run")}
+              color={state === "run" ? "success" : "primary"}
+              onClick={() => handleStateChange("run")}
             >
               Run
             </Button>
           </ButtonGroup>
         </div>
-        <div style={{ border: "1px solid black", padding: "10px" }}>
+        <div style={{ borderTop: "1px solid black", padding: "5px" }}>
           <div
             style={{
               textAlign: "center",
@@ -135,28 +169,33 @@ export default function Top() {
           <div style={{ textAlign: "center" }}>
             <ButtonGroup variant="contained" size="small">
               <Button
-                color={speed === 0.5 ? "secondary" : "primary"}
-                onClick={() => setSpeed(0.5)}
+                color={speed === 0.5 ? "success" : "primary"}
+                onClick={() => handleSpeedChange(0.5)}
               >
                 .5x
               </Button>
               <Button
-                color={speed === 1 ? "secondary" : "primary"}
-                onClick={() => setSpeed(1)}
+                color={speed === 1 ? "success" : "primary"}
+                onClick={() => handleSpeedChange(1)}
               >
                 1x
               </Button>
               <Button
-                color={speed === 2 ? "secondary" : "primary"}
-                onClick={() => setSpeed(2)}
+                color={speed === 2 ? "success" : "primary"}
+                onClick={() => handleSpeedChange(2)}
               >
                 2x
               </Button>
             </ButtonGroup>
           </div>
         </div>
-
-        <div style={{ border: "1px solid black", padding: "10px" }}>
+        <div
+          style={{
+            borderTop: "1px solid black",
+            padding: "5px",
+            textAlign: "center",
+          }}
+        >
           <div
             style={{
               textAlign: "center",
@@ -168,30 +207,60 @@ export default function Top() {
           </div>
           <ButtonGroup variant="contained" size="small">
             <Button
-              color={frameRate === 24 ? "secondary" : "primary"}
+              color={frameRate === 24 ? "success" : "primary"}
               onClick={() => handleChangeFrameRate(24)}
             >
               24
             </Button>
             <Button
-              color={frameRate === 25 ? "secondary" : "primary"}
+              color={frameRate === 25 ? "success" : "primary"}
               onClick={() => handleChangeFrameRate(25)}
             >
               25
             </Button>
             <Button
-              color={frameRate === 29.97 ? "secondary" : "primary"}
+              color={frameRate === 29.97 ? "success" : "primary"}
               onClick={() => handleChangeFrameRate(29.97)}
             >
               29.97
             </Button>
             <Button
-              color={frameRate === 30 ? "secondary" : "primary"}
+              color={frameRate === 30 ? "success" : "primary"}
               onClick={() => handleChangeFrameRate(30)}
             >
               30
             </Button>
           </ButtonGroup>
+        </div>
+        <div
+          style={{
+            fontSize: "16px",
+            fontWeight: "normal",
+            padding: "10px",
+            borderTop: "1px solid black",
+          }}
+        >
+          Consoles artNet IP:
+          <input
+            style={{ width: "120px" }}
+            value={consoleAddress}
+            onChange={handleConsoleAddress}
+          />
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <Button
+            size="small"
+            disabled={!ipIsValid(consoleAddress)}
+            variant="contained"
+            onClick={() => {
+              window.electron.ipcRenderer
+                .invoke("consoleAddress", consoleAddress)
+                .then(res => console.log(res))
+                .catch(err => console.error(err));
+            }}
+          >
+            Output
+          </Button>
         </div>
       </div>
     </div>
