@@ -1,0 +1,29 @@
+.theBody {
+    border-top: 1px solid lightgrey;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.clockBody {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+    background-color: black;
+    color: limeGreen;
+    font-family: Courier New, monospace;
+}
+
+.digitStyle {
+    width: 32px;
+    text-align: center;
+}
+
+.frameRateDiv {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: normal;
+}

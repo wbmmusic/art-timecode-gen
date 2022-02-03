@@ -1,20 +1,12 @@
 import { Button, ButtonGroup } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Clock from "./Clock";
 
 export default function Top() {
-  const [theTime, setTheTime] = useState({ time: "00:00:00:00" });
   const [consoleAddress, setConsoleAddress] = useState("");
   const [frameRate, setFrameRate] = useState(30);
   const [speed, setSpeed] = useState(1);
   const [state, setState] = useState("stop");
-
-  useEffect(() => {
-    window.electron.receive("time", time => setTheTime(time));
-
-    return () => {
-      window.electron.removeListener("time");
-    };
-  }, []);
 
   const handleConsoleAddress = e => {
     let newName = e.target.value;
@@ -86,59 +78,9 @@ export default function Top() {
       .catch(err => console.log(err));
   };
 
-  const digitDivStyle = {
-    width: "32px",
-    textAlign: "center",
-  };
-
-  const makeClock = () => {
-    let timeArray = theTime.time.split(":");
-
-    return (
-      <div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "end",
-            padding: "5px",
-            backgroundColor: "black",
-            color: "limeGreen",
-            fontFamily: "Courier New, monospace",
-          }}
-        >
-          <div style={digitDivStyle}>{timeArray[0]}</div>
-          <div>:</div>
-          <div style={digitDivStyle}>{timeArray[1]}</div>
-          <div>:</div>
-          <div style={digitDivStyle}>{timeArray[2]}</div>
-          <div>:</div>
-          <div style={digitDivStyle}>{timeArray[3]}</div>
-          <div
-            style={{
-              marginLeft: "10px",
-              fontSize: "16px",
-              fontWeight: "normal",
-            }}
-          >{`${frameRate}fps`}</div>
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <div
-      style={{
-        borderTop: "1px solid lightgrey",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-around",
-        alignItems: "center",
-        fontSize: "30px",
-        fontWeight: "bold",
-      }}
-    >
-      {makeClock()}
+    <div className="theBody">
+      <Clock />
       <div>
         <div style={{ textAlign: "center", paddingBottom: "5px" }}>
           <ButtonGroup variant="contained" size="small">
@@ -242,7 +184,7 @@ export default function Top() {
         >
           Consoles artNet IP:
           <input
-            style={{ width: "120px" }}
+            style={{ width: "120px", marginLeft: "10px" }}
             value={consoleAddress}
             onChange={handleConsoleAddress}
           />

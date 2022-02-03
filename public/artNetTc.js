@@ -132,7 +132,7 @@ const setFrameRate = (rate) => {
 }
 
 process.on('message', (msg) => {
-    console.log('Child got a message');
+    //console.log('Child got a message');
     switch (msg.cmd) {
 
         case 'consoleAddress':
