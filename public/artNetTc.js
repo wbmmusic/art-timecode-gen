@@ -22,8 +22,8 @@ const header = Buffer.concat([id, opCode, protVer, filler])
 
 let count = 0;
 
-let hours = 23;
-let mins = 9
+let hours = 0;
+let mins = 59
 let secs = 56;
 let frames = 0
 let framerate = 30
@@ -137,7 +137,15 @@ process.on('message', (msg) => {
 
         case 'consoleAddress':
             console.log('Console Address In Child');
-            consoleAddress = msg.address
+            if (output) {
+                output = false
+                consoleAddress = ''
+            } else {
+                consoleAddress = msg.address
+                output = true
+            }
+
+            process.send({ cmd: 'output', output })
             break;
 
         case 'speed':

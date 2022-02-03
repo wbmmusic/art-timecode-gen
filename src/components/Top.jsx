@@ -7,6 +7,7 @@ export default function Top() {
   const [frameRate, setFrameRate] = useState(30);
   const [speed, setSpeed] = useState(1);
   const [state, setState] = useState("stop");
+  const [output, setOutput] = useState(false);
 
   const handleConsoleAddress = e => {
     let newName = e.target.value;
@@ -109,7 +110,7 @@ export default function Top() {
         Speed
       </div>
       <div style={{ textAlign: "center" }}>
-        <ButtonGroup variant="contained" size="small">
+        <ButtonGroup disabled variant="contained" size="small">
           <Button
             color={speed === 0.5 ? "warning" : "primary"}
             onClick={() => handleSpeedChange(0.5)}
@@ -209,11 +210,11 @@ export default function Top() {
             onClick={() => {
               window.electron.ipcRenderer
                 .invoke("consoleAddress", consoleAddress)
-                .then(res => console.log(res))
+                .then(res => setOutput(res))
                 .catch(err => console.error(err));
             }}
           >
-            Output
+            {output ? "Mute" : "Output"}
           </Button>
         </div>
       </div>

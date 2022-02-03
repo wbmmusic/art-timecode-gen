@@ -77,18 +77,16 @@ app.on('ready', () => {
                 myEmitter.emit('speed', msg.speed)
                 break;
 
+            case 'output':
+                myEmitter.emit('output', msg.output)
+                break;
+
             default:
                 break;
         }
     });
     artNet.on('error', (err) => { console.log(err); })
     artNet.on('close', (err, msg) => { console.log('CLOSED', err, msg); })
-
-    ipcMain.handle('consoleAddress', (e, address) => {
-        console.log('Console Address In Main', address)
-        artNet.send({ cmd: 'consoleAddress', address })
-        return true
-    })
 
     ipcMain.on('reactIsReady', () => {
         //console.log('React Is Ready')
@@ -155,6 +153,24 @@ app.on('ready', () => {
             artNet.send({ cmd: 'speed', speed })
         })
     }
+
+    const setConsoleAddress = async(address) => {
+        return new Promise(async(resolve, reject) => {
+
+            const handleOutput = (newOut) => {
+                myEmitter.removeListener('output', handleOutput)
+                resolve(newOut)
+            }
+
+            myEmitter.on('output', handleOutput)
+
+            artNet.send({ cmd: 'consoleAddress', address })
+        })
+    }
+
+    ipcMain.handle('consoleAddress', async(e, address) => {
+        return await setConsoleAddress(address)
+    })
 
     ipcMain.handle('frameRate', async(e, rate) => {
         console.log('Rate Set to', rate);
