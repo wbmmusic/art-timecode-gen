@@ -24,7 +24,7 @@ let count = 0;
 
 let hours = 0;
 let mins = 59
-let secs = 56;
+let secs = 58;
 let frames = 0
 let framerate = 30
 
