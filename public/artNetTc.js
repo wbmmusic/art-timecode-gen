@@ -69,6 +69,8 @@ const addZero = (num) => {
 
 const makeClock = () => {
 
+    frames++
+
     if (frames >= framerate) {
         frames = 0
         secs++
@@ -99,7 +101,7 @@ const makeClock = () => {
 
     if (hours > 23) hours = 0
 
-    frames++
+
 
     const time = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
     if (consoleAddress !== '' && output) sender.send(Buffer.concat([header, makeTimeBytes()]), 6454, consoleAddress)
