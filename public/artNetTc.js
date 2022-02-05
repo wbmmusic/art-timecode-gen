@@ -69,18 +69,22 @@ const addZero = (num) => {
 
 const makeClock = () => {
 
+    // Increment Frames
     frames++
 
+    // Increment Seconds
     if (frames >= framerate) {
         frames = 0
         secs++
     }
 
+    // Increment Minutes
     if (secs > 59) {
         secs = 0
         mins++
 
         ////////////////////////////////////  This isnt handled right.. well almost... what if we start at 0:0:0:0 or 10:0:0:0..
+        // what if 00:00:10:01 is passed
         if (framerate === 29.97) {
             if (mins % 10 === 0) {
                 console.log('Devisible by ten');
@@ -89,18 +93,15 @@ const makeClock = () => {
                 frames = 2;
             }
         }
-
     }
 
 
-
+    // Increment hours
     if (mins > 59) {
         mins = 0
         hours++
+        if (hours > 23) hours = 0
     }
-
-    if (hours > 23) hours = 0
-
 
 
     const time = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
