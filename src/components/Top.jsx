@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Divider } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Clock from "./Clock";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import CloseIcon from "@mui/icons-material/Close";
@@ -192,8 +192,21 @@ export default function Top() {
     </div>
   );
 
+  useEffect(() => {
+    const bod = document.getElementById("theBody");
+    const hndleResize = e => {
+      console.log(e[0].contentRect.height);
+      window.electron.send("contentHeight", e[0].contentRect.height);
+    };
+    let event = new ResizeObserver(hndleResize).observe(bod);
+
+    return () => {
+      event.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="theBody">
+    <div id="theBody">
       <div className="topBar">
         <div className="topBarDrag">artTimecode Gen</div>
         <div className="buttonsHover" />

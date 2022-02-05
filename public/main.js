@@ -192,6 +192,11 @@ app.on('ready', () => {
 
     ipcMain.on('close', () => app.quit())
     ipcMain.on('min', () => win.minimize())
+    ipcMain.on('contentHeight', (e, height) => {
+        win.setResizable(true)
+        win.setSize(win.getSize()[0], Math.ceil(height) + 2, false)
+        win.setResizable(false)
+    })
 
     createWindow()
 
