@@ -10,7 +10,7 @@ export default function Clock({ state }) {
   }, []);
 
   return (
-    <form className="clockBody">
+    <form className="clockBody" autofocus={false}>
       <input
         maxLength={2}
         disabled={state === "stop" ? false : true}
