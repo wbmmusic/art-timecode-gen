@@ -89,13 +89,17 @@ export default function Top() {
         style={{ cursor: "pointer" }}
         onClick={() => handleStateChange("stop")}
       >
-        <StopIcon style={{ color: state === "stop" ? "red" : "" }} />
+        <StopIcon
+          style={{ color: state === "stop" ? "red" : "", fontSize: "40px" }}
+        />
       </div>
       <div
         style={{ cursor: "pointer" }}
         onClick={() => handleStateChange("run")}
       >
-        <PlayArrowIcon style={{ color: state === "run" ? "#00F800" : "" }} />
+        <PlayArrowIcon
+          style={{ color: state === "run" ? "#00F800" : "", fontSize: "40px" }}
+        />
       </div>
     </div>
   );

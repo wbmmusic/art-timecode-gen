@@ -16,9 +16,9 @@ export default function Clock() {
       <div className="digitStyle">{timeArray[1]}</div>
       <div>:</div>
       <div className="digitStyle">{timeArray[2]}</div>
-      <div>:</div>
+      <div>{theTime.rate !== 29.97 ? ":" : ";"}</div>
       <div className="digitStyle">{timeArray[3]}</div>
-      <div className="frameRateDiv">{`${theTime.rate}fps`}</div>
+      <div className="frameRateDiv">{`${theTime.rate}`}</div>
     </div>
   );
 }
