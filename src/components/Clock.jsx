@@ -5,6 +5,7 @@ export default function Clock({ state }) {
   let timeArray = theTime.time.split(":");
 
   useEffect(() => {
+    document.getElementById("hrInput").blur();
     window.electron.receive("time", time => setTheTime(time));
     return () => window.electron.removeListener("time");
   }, []);
@@ -12,6 +13,7 @@ export default function Clock({ state }) {
   return (
     <div className="clockBody">
       <input
+        id="hrInput"
         maxLength={2}
         disabled={state === "stop" ? false : true}
         className="digitStyle"
