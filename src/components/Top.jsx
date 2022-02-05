@@ -210,7 +210,9 @@ export default function Top() {
   return (
     <div id="theBody">
       <div className="topBar">
-        <div className="topBarDrag">artTimecode Gen</div>
+        <div className="topBarDrag">
+          artTimecode Gen v{window.electron.ver()}
+        </div>
         <div className="buttonsHover" />
       </div>
       <div className="topRightButtons">
