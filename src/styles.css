@@ -154,7 +154,7 @@ body {
 }
 
 #expand:hover {
-    transition-delay: 0.25s;
+    background: darkgrey;
     transition: opacity 0 ease-in;
 }
 
