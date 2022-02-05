@@ -32,7 +32,7 @@ const createWindow = () => {
     // Create the browser window.
     win = new BrowserWindow({
         width: 300,
-        height: 350,
+        height: 280,
         autoHideMenuBar: true,
         show: false,
         title: 'ArtTimecode Gen v' + app.getVersion(),

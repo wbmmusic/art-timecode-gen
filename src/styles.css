@@ -146,5 +146,5 @@ body {
 #expand:hover+#drawer {
     height: 160px;
     transition: height 0.25s ease-in;
-    transition-delay: 0.15s;
+    transition-delay: 0.1s;
 }
