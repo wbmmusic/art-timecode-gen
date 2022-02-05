@@ -92,10 +92,16 @@ export default function Top() {
         justifyContent: "center",
       }}
     >
-      <div onClick={() => handleStateChange("stop")}>
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => handleStateChange("stop")}
+      >
         <StopIcon style={{ color: state === "stop" ? "red" : "" }} />
       </div>
-      <div onClick={() => handleStateChange("run")}>
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => handleStateChange("run")}
+      >
         <PlayArrowIcon style={{ color: state === "run" ? "lightGreen" : "" }} />
       </div>
     </div>
@@ -103,7 +109,11 @@ export default function Top() {
 
   const Speed = () => (
     <div
-      style={{ borderTop: "1px solid black", padding: "5px", display: "none" }}
+      style={{
+        borderTop: "2px solid darkgrey",
+        padding: "5px",
+        display: "none",
+      }}
     >
       <div
         style={{
@@ -142,7 +152,7 @@ export default function Top() {
   const FrameRate = () => (
     <div
       style={{
-        borderTop: "1px solid black",
+        borderTop: "2px solid darkgrey",
         padding: "5px",
         textAlign: "center",
       }}
@@ -209,7 +219,7 @@ export default function Top() {
             style={{
               fontWeight: "normal",
               padding: "10px",
-              borderTop: "1px solid black",
+              borderTop: "2px solid darkgrey",
               fontSize: "16px",
             }}
           >
