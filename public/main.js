@@ -39,6 +39,7 @@ const createWindow = () => {
         transparent: true,
         frame: false,
         resizable: false,
+        hasShadow: false,
         webPreferences: {
             preload: join(__dirname, 'preload.js')
         }
