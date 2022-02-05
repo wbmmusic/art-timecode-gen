@@ -10,7 +10,7 @@ export default function Clock({ state }) {
   }, []);
 
   return (
-    <div className="clockBody">
+    <form className="clockBody">
       <input
         maxLength={2}
         disabled={state === "stop" ? false : true}
@@ -39,6 +39,6 @@ export default function Clock({ state }) {
         value={timeArray[3]}
       />
       <div className="frameRateDiv">{`${theTime.rate}`}</div>
-    </div>
+    </form>
   );
 }
