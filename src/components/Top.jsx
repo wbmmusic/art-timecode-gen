@@ -159,6 +159,7 @@ export default function Top() {
           textAlign: "center",
           fontSize: "16px",
           fontWeight: "normal",
+          color: "ActiveBorder",
         }}
       >
         Frame Rate
@@ -219,7 +220,7 @@ export default function Top() {
           <MinimizeIcon style={{ fontSize: "12px" }} />
         </div>
       </div>
-      <Clock />
+      <Clock state={state} />
       <RunStop />
       <div id="expand" />
       <div id="drawer">
@@ -234,7 +235,9 @@ export default function Top() {
               fontSize: "16px",
             }}
           >
-            Consoles artNet IP:
+            <div style={{ display: "inline-block", color: "white" }}>
+              Consoles artNet IP:
+            </div>
             <input
               style={{ width: "120px", marginLeft: "10px" }}
               value={consoleAddress}

@@ -14,13 +14,14 @@
 body {
     background: none;
     overflow: hidden;
+    user-select: none;
 }
 
 .clockBody {
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     padding: 5px;
     background-color: black;
     color: limeGreen;
@@ -29,9 +30,16 @@ body {
 }
 
 .digitStyle {
-    width: 32px;
+    width: 36px;
     text-align: center;
     white-space: nowrap;
+    color: inherit;
+    background-color: inherit;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    text-align: center;
 }
 
 .frameRateDiv {
@@ -44,6 +52,7 @@ body {
     height: 0px;
     overflow: hidden;
     transition: height 0.25s ease-in;
+    transition-delay: 0.25s;
 }
 
 #drawer:hover {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Clock() {
+export default function Clock({ state }) {
   const [theTime, setTheTime] = useState({ time: "00:00:00:00", rate: 30 });
   let timeArray = theTime.time.split(":");
 
@@ -11,13 +11,33 @@ export default function Clock() {
 
   return (
     <div className="clockBody">
-      <div className="digitStyle">{timeArray[0]}</div>
+      <input
+        maxLength={2}
+        disabled={state === "stop" ? false : true}
+        className="digitStyle"
+        value={timeArray[0]}
+      />
       <div>:</div>
-      <div className="digitStyle">{timeArray[1]}</div>
+      <input
+        maxLength={2}
+        disabled={state === "stop" ? false : true}
+        className="digitStyle"
+        value={timeArray[1]}
+      />
       <div>:</div>
-      <div className="digitStyle">{timeArray[2]}</div>
+      <input
+        maxLength={2}
+        disabled={state === "stop" ? false : true}
+        className="digitStyle"
+        value={timeArray[2]}
+      />
       <div>{theTime.rate !== 29.97 ? ":" : ";"}</div>
-      <div className="digitStyle">{timeArray[3]}</div>
+      <input
+        maxLength={2}
+        disabled={state === "stop" ? false : true}
+        className="digitStyle"
+        value={timeArray[3]}
+      />
       <div className="frameRateDiv">{`${theTime.rate}`}</div>
     </div>
   );
