@@ -5,7 +5,9 @@ export default function Clock({ state }) {
   let timeArray = theTime.time.split(":");
 
   useEffect(() => {
-    document.getElementById("hrInput").blur();
+    setInterval(() => {
+      document.getElementById("hrInput").blur();
+    }, 1000);
     window.electron.receive("time", time => setTheTime(time));
     return () => window.electron.removeListener("time");
   }, []);
