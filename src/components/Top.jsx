@@ -195,6 +195,7 @@ export default function Top() {
 
   useEffect(() => {
     const bod = document.getElementById("theBody");
+    bod.focus();
     const hndleResize = e => {
       console.log(e[0].contentRect.height);
       window.electron.send("contentHeight", e[0].contentRect.height);
