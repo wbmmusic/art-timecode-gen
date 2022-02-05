@@ -1,8 +1,10 @@
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, Divider } from "@mui/material";
 import React, { useState } from "react";
 import Clock from "./Clock";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import CloseIcon from "@mui/icons-material/Close";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import StopIcon from "@mui/icons-material/Stop";
 
 export default function Top() {
   const [consoleAddress, setConsoleAddress] = useState("");
@@ -82,21 +84,20 @@ export default function Top() {
   };
 
   const RunStop = () => (
-    <div style={{ textAlign: "center", paddingBottom: "5px" }}>
-      <ButtonGroup variant="contained" size="small">
-        <Button
-          color={state === "stop" ? "warning" : "error"}
-          onClick={() => handleStateChange("stop")}
-        >
-          Stop
-        </Button>
-        <Button
-          color={state === "run" ? "warning" : "success"}
-          onClick={() => handleStateChange("run")}
-        >
-          Run
-        </Button>
-      </ButtonGroup>
+    <div
+      style={{
+        textAlign: "center",
+        paddingBottom: "5px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <div onClick={() => handleStateChange("stop")}>
+        <StopIcon style={{ color: state === "stop" ? "red" : "" }} />
+      </div>
+      <div onClick={() => handleStateChange("run")}>
+        <PlayArrowIcon style={{ color: state === "run" ? "lightGreen" : "" }} />
+      </div>
     </div>
   );
 
@@ -187,7 +188,7 @@ export default function Top() {
   return (
     <div className="theBody">
       <div className="topBar">
-        <div className="topBarDrag" />
+        <div className="topBarDrag">artTimecode Gen</div>
         <div className="buttonsHover" />
       </div>
       <div className="topRightButtons">

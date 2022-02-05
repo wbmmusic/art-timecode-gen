@@ -5,8 +5,8 @@
     align-items: center;
     font-size: 30px;
     font-weight: bold;
-    background: red;
-    border-radius: 10px;
+    border-radius: 6px;
+    background: rgb(84, 84, 84);
     overflow: hidden;
 }
 
@@ -17,6 +17,7 @@ body {
 .clockBody {
     display: flex;
     width: 100%;
+    justify-content: center;
     align-items: flex-end;
     padding: 5px;
     background-color: black;
@@ -36,7 +37,7 @@ body {
 }
 
 .drawer {
-    height: 20px;
+    height: 30px;
     overflow: hidden;
     transition: height 0.25s ease-in;
 }
@@ -53,7 +54,7 @@ body {
     flex-direction: row-reverse;
     justify-content: space-around;
     font-size: 16px;
-    background-color: white;
+    background-color: silver;
     position: absolute;
     width: 50px;
     padding: 2px;
@@ -72,17 +73,20 @@ body {
 }
 
 .topBar {
-    height: 14px;
+    height: 18px;
     width: 100%;
     display: flex;
-    background: blue;
 }
 
 .topBarDrag {
-    height: 14px;
+    font-family: Courier New, monospace;
+    padding-left: 4px;
+    padding-top: 2px;
     width: 100%;
+    color: silver;
+    font-size: 14px;
     cursor: grab;
-    background: silver;
+    background: rgb(64, 64, 64);
     -webkit-user-select: none;
     -webkit-app-region: drag;
 }
@@ -104,7 +108,7 @@ body {
 }
 
 .closeBtn:hover {
-    background: salmon;
+    background: red;
 }
 
 .minBtn {
@@ -119,5 +123,5 @@ body {
 }
 
 .minBtn:hover {
-    background: lightgrey;
+    background: white;
 }

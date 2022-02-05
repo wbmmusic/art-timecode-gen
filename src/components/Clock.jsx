@@ -10,17 +10,15 @@ export default function Clock() {
   }, []);
 
   return (
-    <div>
-      <div className="clockBody">
-        <div className="digitStyle">{timeArray[0]}</div>
-        <div>:</div>
-        <div className="digitStyle">{timeArray[1]}</div>
-        <div>:</div>
-        <div className="digitStyle">{timeArray[2]}</div>
-        <div>:</div>
-        <div className="digitStyle">{timeArray[3]}</div>
-        <div className="frameRateDiv">{`${theTime.rate}fps`}</div>
-      </div>
+    <div className="clockBody">
+      <div className="digitStyle">{timeArray[0]}</div>
+      <div>:</div>
+      <div className="digitStyle">{timeArray[1]}</div>
+      <div>:</div>
+      <div className="digitStyle">{timeArray[2]}</div>
+      <div>:</div>
+      <div className="digitStyle">{timeArray[3]}</div>
+      <div className="frameRateDiv">{`${theTime.rate}fps`}</div>
     </div>
   );
 }
