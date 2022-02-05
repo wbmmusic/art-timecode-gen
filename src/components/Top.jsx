@@ -102,7 +102,7 @@ export default function Top() {
         style={{ cursor: "pointer" }}
         onClick={() => handleStateChange("run")}
       >
-        <PlayArrowIcon style={{ color: state === "run" ? "lightGreen" : "" }} />
+        <PlayArrowIcon style={{ color: state === "run" ? "#00F800" : "" }} />
       </div>
     </div>
   );
