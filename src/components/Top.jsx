@@ -195,13 +195,13 @@ export default function Top() {
 
   useEffect(() => {
     const bod = document.getElementById("theBody");
-    bod.focus();
+
     const hndleResize = e => {
       console.log(e[0].contentRect.height);
       window.electron.send("contentHeight", e[0].contentRect.height);
     };
     let event = new ResizeObserver(hndleResize).observe(bod);
-
+    document.getElementById("hrInput").blur();
     return () => {
       event.disconnect();
     };
