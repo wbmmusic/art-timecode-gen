@@ -235,7 +235,19 @@ export default function Top() {
       <Clock state={state} />
       <RunStop />
       <div id="expand" />
-      <div id="drawer">
+      <div
+        id="drawer"
+        onMouseOver={() => {
+          let exp = document.getElementById("expand");
+          exp.style.opacity = 0;
+          exp.style.transitionDelay = "0s";
+        }}
+        onMouseOut={() => {
+          let exp = document.getElementById("expand");
+          exp.style.opacity = 1;
+          exp.style.transitionDelay = "0.45s";
+        }}
+      >
         <Speed />
         <FrameRate />
         <div>

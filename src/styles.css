@@ -154,6 +154,8 @@ body {
     background: rgb(130, 130, 130);
     opacity: 1;
     border-radius: 7px 7px 0px 0px;
+    transition: opacity .25s ease-in;
+    transition-delay: .5s;
 }
 
 #expand:hover {
