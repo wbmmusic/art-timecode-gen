@@ -221,6 +221,7 @@ export default function Top() {
           <MinimizeIcon style={{ fontSize: "12px" }} />
         </div>
       </div>
+      <input style={{ display: "none" }} />
       <Clock state={state} />
       <RunStop />
       <div id="expand" />

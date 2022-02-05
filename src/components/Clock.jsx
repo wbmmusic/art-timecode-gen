@@ -10,9 +10,8 @@ export default function Clock({ state }) {
   }, []);
 
   return (
-    <form className="clockBody" autofocus={false}>
+    <form className="clockBody">
       <input
-        autofocus={false}
         maxLength={2}
         disabled={state === "stop" ? false : true}
         className="digitStyle"
