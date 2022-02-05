@@ -12,6 +12,7 @@ export default function Clock({ state }) {
   return (
     <div className="clockBody">
       <input
+        autoFocus={false}
         maxLength={2}
         disabled={state === "stop" ? false : true}
         className="digitStyle"
