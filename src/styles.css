@@ -103,8 +103,13 @@ body {
 }
 
 .buttonsHover {
+    display: flex;
     background-color: grey;
     width: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .closeBtn {

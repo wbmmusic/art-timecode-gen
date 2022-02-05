@@ -5,6 +5,7 @@ import MinimizeIcon from "@mui/icons-material/Minimize";
 import CloseIcon from "@mui/icons-material/Close";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 export default function Top() {
   const [consoleAddress, setConsoleAddress] = useState("");
@@ -213,7 +214,9 @@ export default function Top() {
         <div className="topBarDrag">
           artTimecode Gen v{window.electron.ver()}
         </div>
-        <div className="buttonsHover" />
+        <div className="buttonsHover">
+          <MoreHorizIcon style={{ fontSize: "inherit" }} />
+        </div>
       </div>
       <div className="topRightButtons">
         <div className="closeBtn" onClick={() => window.electron.send("close")}>

@@ -6,7 +6,7 @@ const { autoUpdater } = require('electron-updater');
 const EventEmitter = require('events');
 const myEmitter = new EventEmitter();
 
-
+const windowWidth = 300
 let win
 
 // SECOND INSTANCE
@@ -31,7 +31,7 @@ artNet.stderr.pipe(process.stdout)
 const createWindow = () => {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 300,
+        width: windowWidth,
         height: 280,
         autoHideMenuBar: true,
         show: false,
@@ -193,9 +193,7 @@ app.on('ready', () => {
     ipcMain.on('close', () => app.quit())
     ipcMain.on('min', () => win.minimize())
     ipcMain.on('contentHeight', (e, height) => {
-        win.setResizable(true)
-        win.setSize(win.getSize()[0], Math.ceil(height) + 2, false)
-        win.setResizable(false)
+        win.setSize(windowWidth, Math.ceil(height) + 2, false)
     })
 
     createWindow()
