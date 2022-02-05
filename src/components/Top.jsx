@@ -201,7 +201,7 @@ export default function Top() {
       window.electron.send("contentHeight", e[0].contentRect.height);
     };
     let event = new ResizeObserver(hndleResize).observe(bod);
-    document.getElementById("hrInput").blur();
+
     return () => {
       event.disconnect();
     };
