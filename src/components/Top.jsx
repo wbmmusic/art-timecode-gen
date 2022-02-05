@@ -84,14 +84,7 @@ export default function Top() {
   };
 
   const RunStop = () => (
-    <div
-      style={{
-        textAlign: "center",
-        paddingBottom: "5px",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <div id="startStop">
       <div
         style={{ cursor: "pointer" }}
         onClick={() => handleStateChange("stop")}
@@ -210,8 +203,9 @@ export default function Top() {
         </div>
       </div>
       <Clock />
-      <div className="drawer">
-        <RunStop />
+      <RunStop />
+      <div id="expand" />
+      <div id="drawer">
         <Speed />
         <FrameRate />
         <div>
