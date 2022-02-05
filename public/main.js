@@ -36,6 +36,9 @@ const createWindow = () => {
         autoHideMenuBar: true,
         show: false,
         title: 'ArtTimecode Gen v' + app.getVersion(),
+        transparent: true,
+        frame: false,
+        resizable: false,
         webPreferences: {
             preload: join(__dirname, 'preload.js')
         }
@@ -184,6 +187,9 @@ app.on('ready', () => {
     ipcMain.handle('speed', async(e, speed) => {
         return await setSpeed(speed)
     })
+
+    ipcMain.on('close', () => app.quit())
+    ipcMain.on('min', () => win.minimize())
 
     createWindow()
 

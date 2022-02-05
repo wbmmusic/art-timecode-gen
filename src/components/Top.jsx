@@ -1,6 +1,8 @@
 import { Button, ButtonGroup } from "@mui/material";
 import React, { useState } from "react";
 import Clock from "./Clock";
+import MinimizeIcon from "@mui/icons-material/Minimize";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Top() {
   const [consoleAddress, setConsoleAddress] = useState("");
@@ -99,7 +101,9 @@ export default function Top() {
   );
 
   const Speed = () => (
-    <div style={{ borderTop: "1px solid black", padding: "5px" }}>
+    <div
+      style={{ borderTop: "1px solid black", padding: "5px", display: "none" }}
+    >
       <div
         style={{
           textAlign: "center",
@@ -182,40 +186,54 @@ export default function Top() {
 
   return (
     <div className="theBody">
-      <Clock />
-      <RunStop />
-      <Speed />
-      <FrameRate />
-      <div>
-        <div
-          style={{
-            fontSize: "16px",
-            fontWeight: "normal",
-            padding: "10px",
-            borderTop: "1px solid black",
-          }}
-        >
-          Consoles artNet IP:
-          <input
-            style={{ width: "120px", marginLeft: "10px" }}
-            value={consoleAddress}
-            onChange={handleConsoleAddress}
-          />
+      <div className="topBar">
+        <div className="topBarDrag" />
+        <div className="buttonsHover" />
+      </div>
+      <div className="topRightButtons">
+        <div className="closeBtn" onClick={() => window.electron.send("close")}>
+          <CloseIcon style={{ fontSize: "12px" }} />
         </div>
-        <div style={{ textAlign: "center" }}>
-          <Button
-            size="small"
-            disabled={!ipIsValid(consoleAddress)}
-            variant="contained"
-            onClick={() => {
-              window.electron.ipcRenderer
-                .invoke("consoleAddress", consoleAddress)
-                .then(res => setOutput(res))
-                .catch(err => console.error(err));
+        <div className="minBtn" onClick={() => window.electron.send("min")}>
+          <MinimizeIcon style={{ fontSize: "12px" }} />
+        </div>
+      </div>
+      <Clock />
+      <div className="drawer">
+        <RunStop />
+        <Speed />
+        <FrameRate />
+        <div>
+          <div
+            style={{
+              fontWeight: "normal",
+              padding: "10px",
+              borderTop: "1px solid black",
+              fontSize: "16px",
             }}
           >
-            {output ? "Mute" : "Output"}
-          </Button>
+            Consoles artNet IP:
+            <input
+              style={{ width: "120px", marginLeft: "10px" }}
+              value={consoleAddress}
+              onChange={handleConsoleAddress}
+            />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              size="small"
+              disabled={!ipIsValid(consoleAddress)}
+              variant="contained"
+              onClick={() => {
+                window.electron.ipcRenderer
+                  .invoke("consoleAddress", consoleAddress)
+                  .then(res => setOutput(res))
+                  .catch(err => console.error(err));
+              }}
+            >
+              {output ? "Mute" : "Output"}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
