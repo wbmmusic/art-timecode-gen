@@ -87,6 +87,12 @@ export default function Top() {
   const RunStop = () => (
     <div id="startStop">
       <div
+        className="destDisplay"
+        style={{ color: output ? "limegreen" : "red" }}
+      >
+        {consoleAddress}
+      </div>
+      <div
         style={{ cursor: "pointer" }}
         onClick={() => handleStateChange("stop")}
       >
@@ -158,7 +164,7 @@ export default function Top() {
       <div
         style={{
           textAlign: "center",
-          fontSize: "16px",
+          fontSize: "12px",
           fontWeight: "normal",
           color: "ActiveBorder",
         }}
@@ -204,7 +210,7 @@ export default function Top() {
     const observer = new ResizeObserver(hndleResize).observe(bod);
 
     return () => {
-      observer.unobserve();
+      //observer.unobserve();
     };
   }, []);
 
@@ -262,8 +268,14 @@ export default function Top() {
               fontSize: "16px",
             }}
           >
-            <div style={{ display: "inline-block", color: "white" }}>
-              Consoles artNet IP:
+            <div
+              style={{
+                display: "inline-block",
+                color: "white",
+                fontSize: "12px",
+              }}
+            >
+              Destination IP:
             </div>
             <input
               style={{ width: "120px", marginLeft: "10px" }}
