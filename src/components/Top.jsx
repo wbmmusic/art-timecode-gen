@@ -13,6 +13,12 @@ export default function Top() {
   const [speed, setSpeed] = useState(1);
   const [state, setState] = useState("stop");
   const [output, setOutput] = useState(false);
+  const [inputTime, setInputTime] = useState({
+    hr: null,
+    min: null,
+    sec: null,
+    frm: null,
+  });
 
   const handleConsoleAddress = e => {
     let newName = e.target.value;
@@ -198,13 +204,13 @@ export default function Top() {
     const bod = document.getElementById("theBody");
 
     const hndleResize = e => {
-      console.log(e[0].contentRect.height);
+      /*console.log(e[0].contentRect.height);*/
       window.electron.send("contentHeight", e[0].contentRect.height);
     };
     let event = new ResizeObserver(hndleResize).observe(bod);
 
     return () => {
-      event.disconnect();
+      //event.disconnect();
     };
   }, []);
 

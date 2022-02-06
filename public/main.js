@@ -190,6 +190,10 @@ app.on('ready', () => {
         return await setSpeed(speed)
     })
 
+    ipcMain.on('time', (e, time) => {
+        artNet.send({ cmd: 'time', time })
+    })
+
     ipcMain.on('close', () => app.quit())
     ipcMain.on('min', () => win.minimize())
     ipcMain.on('contentHeight', (e, height) => {

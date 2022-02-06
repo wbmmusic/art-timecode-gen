@@ -23,8 +23,8 @@ const header = Buffer.concat([id, opCode, protVer, filler])
 let count = 0;
 
 let hours = 0;
-let mins = 59
-let secs = 58;
+let mins = 0
+let secs = 0;
 let frames = 0
 let framerate = 30
 
@@ -131,7 +131,20 @@ const startTimer = () => {
 const setFrameRate = (rate) => {
     framerate = rate
     if (running) startTimer()
+    const clock = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
+    process.send({ cmd: 'time', clock })
     return framerate
+}
+
+const handleTime = (time) => {
+    console.log(time);
+    hours = time[0]
+    mins = time[1]
+    secs = time[2]
+    frames = time[3]
+
+    const clock = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
+    process.send({ cmd: 'time', clock })
 }
 
 process.on('message', (msg) => {
@@ -172,6 +185,9 @@ process.on('message', (msg) => {
             process.send({ cmd: 'state', state: msg.state })
             break;
 
+        case 'time':
+            handleTime(msg.time)
+            break;
         default:
             console.log('ELSE');
             break;
