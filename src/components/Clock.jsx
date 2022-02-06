@@ -59,6 +59,7 @@ export default function Clock({ state }) {
       id="clockForm"
       className="clockBody"
       onSubmit={e => e.preventDefault()}
+      style={{ WebkitUserSelect: state === "stop" ? "" : "none" }}
     >
       <input
         id="hr"

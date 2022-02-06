@@ -178,7 +178,7 @@ app.on('ready', () => {
     })
 
     ipcMain.handle('frameRate', async(e, rate) => {
-        console.log('Rate Set to', rate);
+        //console.log('Rate Set to', rate);
         return await setRate(rate)
     })
 

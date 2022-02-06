@@ -1,6 +1,6 @@
 {
     "name": "art-timecode-gen",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "author": "Marece Williams",
     "description": "ArtNet Timecode Generator",
     "homepage": "./",

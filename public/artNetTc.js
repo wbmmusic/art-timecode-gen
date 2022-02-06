@@ -137,7 +137,7 @@ const setFrameRate = (rate) => {
 }
 
 const handleTime = (time) => {
-    console.log(time);
+    //console.log(time);
     hours = time[0]
     mins = time[1]
     secs = time[2]
@@ -152,7 +152,7 @@ process.on('message', (msg) => {
     switch (msg.cmd) {
 
         case 'consoleAddress':
-            console.log('Console Address In Child');
+            //console.log('Console Address In Child');
             if (output) {
                 output = false
                 consoleAddress = ''
@@ -165,18 +165,18 @@ process.on('message', (msg) => {
             break;
 
         case 'speed':
-            console.log('Speed Change', msg.speed);
+            //console.log('Speed Change', msg.speed);
             speed = msg.speed
             process.send({ cmd: 'speed', speed })
             break;
 
         case 'rate':
-            console.log('Rate Change');
+            //console.log('Rate Change');
             process.send({ cmd: 'rate', rate: setFrameRate(msg.rate) })
             break;
 
         case 'state':
-            console.log('state Command', msg.state);
+            //console.log('state Command', msg.state);
             if (msg.state === 'run') {
                 startTimer()
             } else if (msg.state === 'stop') {
@@ -188,6 +188,7 @@ process.on('message', (msg) => {
         case 'time':
             handleTime(msg.time)
             break;
+
         default:
             console.log('ELSE');
             break;
