@@ -1,10 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, protocol } = require('electron')
 const { join } = require('path')
 const { fork } = require('child_process')
 const URL = require('url')
 const { autoUpdater } = require('electron-updater');
 const EventEmitter = require('events');
 const myEmitter = new EventEmitter();
+const path = require('path');
 
 const windowWidth = 300
 let win
@@ -60,6 +61,12 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
+
+    protocol.registerFileProtocol('atom', (request, callback) => {
+        const url = request.url.substr(6)
+        callback({ path: path.normalize(`${__dirname}/${url}`) })
+    })
+
     artNet.on('message', (msg) => {
         switch (msg.cmd) {
             case 'time':

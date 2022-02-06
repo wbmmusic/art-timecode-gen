@@ -207,6 +207,12 @@ export default function Top() {
     </div>
   );
 
+  const makeCopy = () => {
+    const date = new Date(Date.now());
+    const year = date.getFullYear();
+    return year;
+  };
+
   useEffect(() => {
     const bod = document.getElementById("theBody");
 
@@ -251,6 +257,35 @@ export default function Top() {
       <Clock state={state} />
       <InfoBar />
       <RunStop />
+      <div
+        style={{
+          display: "inline-block",
+          height: "50px",
+          position: "absolute",
+          right: "4px",
+          top: "81px",
+        }}
+      >
+        <img
+          style={{ maxHeight: "100%" }}
+          src={"atom://artnetlogo.png"}
+          alt="artNet Logo"
+        />
+      </div>
+      <div
+        style={{
+          display: "inline-block",
+          height: "50px",
+          position: "absolute",
+          left: "5px",
+          top: "118px",
+          fontSize: "14px",
+          color: "grey",
+          fontWeight: "normal",
+        }}
+      >
+        WBM Tek
+      </div>
       <div id="expand" />
       <div
         id="drawer"
