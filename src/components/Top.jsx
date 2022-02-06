@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Divider } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Clock from "./Clock";
 import MinimizeIcon from "@mui/icons-material/Minimize";
@@ -13,12 +13,6 @@ export default function Top() {
   const [speed, setSpeed] = useState(1);
   const [state, setState] = useState("stop");
   const [output, setOutput] = useState(false);
-  const [inputTime, setInputTime] = useState({
-    hr: null,
-    min: null,
-    sec: null,
-    frm: null,
-  });
 
   const handleConsoleAddress = e => {
     let newName = e.target.value;
@@ -207,10 +201,10 @@ export default function Top() {
       /*console.log(e[0].contentRect.height);*/
       window.electron.send("contentHeight", e[0].contentRect.height);
     };
-    let event = new ResizeObserver(hndleResize).observe(bod);
+    const observer = new ResizeObserver(hndleResize).observe(bod);
 
     return () => {
-      //event.disconnect();
+      observer.unobserve();
     };
   }, []);
 
