@@ -87,12 +87,6 @@ export default function Top() {
   const RunStop = () => (
     <div id="startStop">
       <div
-        className="destDisplay"
-        style={{ color: output ? "limegreen" : "red" }}
-      >
-        {consoleAddress}
-      </div>
-      <div
         style={{ cursor: "pointer" }}
         onClick={() => handleStateChange("stop")}
       >
@@ -200,6 +194,19 @@ export default function Top() {
     </div>
   );
 
+  const InfoBar = () => (
+    <div className="infoBar">
+      <div
+        className="destDisplay"
+        style={{ color: output ? "limegreen" : "red" }}
+      >
+        {consoleAddress}
+      </div>
+      <div style={{ width: "100%" }} />
+      <div className="frDisplay">{frameRate}</div>
+    </div>
+  );
+
   useEffect(() => {
     const bod = document.getElementById("theBody");
 
@@ -242,6 +249,7 @@ export default function Top() {
         }}
       />
       <Clock state={state} />
+      <InfoBar />
       <RunStop />
       <div id="expand" />
       <div

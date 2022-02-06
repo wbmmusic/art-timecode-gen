@@ -97,7 +97,6 @@ export default function Clock({ state }) {
         value={timeArray[3]}
         onChange={e => handleInput({ type: "frm", value: e.target.value })}
       />
-      <div className="frameRateDiv">{`${theTime.rate}`}</div>
       <button hidden id="submit" type="submit">
         submit
       </button>

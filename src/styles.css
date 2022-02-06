@@ -174,10 +174,21 @@ body {
 
 .destDisplay {
     font-size: 11px;
-    position: absolute;
-    left: 0px;
     font-weight: normal;
-    top: 0px;
     background: black;
     padding: 0px 5px;
+}
+
+.frDisplay {
+    font-size: 11px;
+    font-weight: normal;
+    background: black;
+    padding: 0px 5px;
+    color: limeGreen;
+}
+
+.infoBar {
+    background: black;
+    display: flex;
+    width: 100%;
 }
