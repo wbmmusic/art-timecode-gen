@@ -87,12 +87,14 @@ const checkValidTime = () => {
     }
 
     if (framerate === 29.97) {
-        if (frames === 0 || frames === 1) {
-            if (mins % 10 === 0) {
-                console.log('Devisible by ten');
-            } else {
-                console.log('Dropped Frames');
-                frames = 2;
+        if (secs === 0) {
+            if (frames === 0 || frames === 1) {
+                if (mins % 10 === 0) {
+                    console.log('Devisible by ten');
+                } else {
+                    console.log('Dropped Frames');
+                    frames = 2;
+                }
             }
         }
     }
