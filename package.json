@@ -1,6 +1,6 @@
 {
     "name": "art-timecode-gen",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "author": "Marece Williams",
     "description": "ArtNet Timecode Generator",
     "homepage": "./",
@@ -9,12 +9,12 @@
     "dependencies": {
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
-        "@mui/icons-material": "^5.3.1",
-        "@mui/material": "^5.4.0",
+        "@mui/icons-material": "^5.4.1",
+        "@mui/material": "^5.4.1",
         "@testing-library/jest-dom": "^5.16.2",
         "@testing-library/react": "^12.1.2",
         "@testing-library/user-event": "^13.5.0",
-        "electron-updater": "^4.6.1",
+        "electron-updater": "^4.6.5",
         "nanotimer": "^0.3.15",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
@@ -87,7 +87,7 @@
     },
     "devDependencies": {
         "electron": "^17.0.0",
-        "electron-builder": "^22.14.5",
+        "electron-builder": "^22.14.13",
         "electron-notarize": "^1.1.1",
         "electron-rebuild": "^3.2.7",
         "foreman": "^3.0.1"
