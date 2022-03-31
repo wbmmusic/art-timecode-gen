@@ -207,26 +207,6 @@ export default function Top() {
     </div>
   );
 
-  const makeCopy = () => {
-    const date = new Date(Date.now());
-    const year = date.getFullYear();
-    return year;
-  };
-
-  useEffect(() => {
-    const bod = document.getElementById("theBody");
-
-    const hndleResize = e => {
-      /*console.log(e[0].contentRect.height);*/
-      window.electron.send("contentHeight", e[0].contentRect.height);
-    };
-    const observer = new ResizeObserver(hndleResize).observe(bod);
-
-    return () => {
-      //observer.unobserve();
-    };
-  }, []);
-
   return (
     <div id="theBody">
       <div className="topBar">
