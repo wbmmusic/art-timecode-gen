@@ -28,15 +28,14 @@
         "eject": "react-scripts eject",
         "electron": "electron .",
         "dev": "nf start",
-        "install": "electron-rebuild",
-        "rebuild": "electron-rebuild -f",
         "package": "electron-builder build -c.extraMetadata.main=build/main.js --publish never",
         "deploy": "electron-builder build -c.extraMetadata.main=build/main.js --publish always",
         "backup": "git add . && git commit -m %NPM_PACKAGE_VERSION% && git push origin main ",
         "upload": "yarn build && yarn backup && yarn deploy",
         "mac": "yarn && yarn build && node copyPlist.js && yarn deploy",
         "try": "yarn build && yarn package ",
-        "refresh": "yarn upgrade --latest && yarn rebuild"
+        "refresh": "yarn upgrade --latest",
+        "postinstall": "electron-builder install-app-deps"
     },
     "eslintConfig": {
         "extends": [
@@ -89,7 +88,6 @@
         "electron": "^19.0.10",
         "electron-builder": "^23.3.3",
         "electron-notarize": "^1.2.1",
-        "electron-rebuild": "^3.2.8",
         "foreman": "^3.0.1"
     }
 }
