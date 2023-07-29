@@ -85,7 +85,7 @@
         "url": "https://github.com/wbmmusic/art-timecode-gen.git"
     },
     "devDependencies": {
-        "electron": "^25.3.1",
+        "electron": "^25.3.2",
         "electron-builder": "^24.6.3",
         "electron-notarize": "^1.2.2",
         "foreman": "^3.0.1"
