@@ -62,7 +62,7 @@ export default function Top() {
 
   const handleChangeFrameRate = rate => {
     if (rate === frameRate) return;
-    window.electron.ipcRenderer
+    window.electron
       .invoke("frameRate", rate)
       .then(res => setFrameRate(res))
       .catch(err => console.log(err));
@@ -70,7 +70,7 @@ export default function Top() {
 
   const handleStateChange = newState => {
     if (newState === state) return;
-    window.electron.ipcRenderer
+    window.electron
       .invoke("state", newState)
       .then(res => setState(res))
       .catch(err => console.log(err));
@@ -78,7 +78,7 @@ export default function Top() {
 
   const handleSpeedChange = newSpeed => {
     if (newSpeed === speed) return;
-    window.electron.ipcRenderer
+    window.electron
       .invoke("speed", newSpeed)
       .then(res => setSpeed(res))
       .catch(err => console.log(err));
@@ -312,7 +312,7 @@ export default function Top() {
               disabled={!ipIsValid(consoleAddress)}
               variant="contained"
               onClick={() => {
-                window.electron.ipcRenderer
+                window.electron
                   .invoke("consoleAddress", consoleAddress)
                   .then(res => setOutput(res))
                   .catch(err => console.error(err));
