@@ -77,7 +77,8 @@
             "sign": false
         },
         "win": {
-            "icon": "public/icon.ico"
+            "icon": "public/icon.ico",
+            "certificateSubjectName": "WBM Tek (Mareci, William)"
         }
     },
     "repository": {
