@@ -9,8 +9,8 @@
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
-        "@mui/icons-material": "^6.4.1",
-        "@mui/material": "^6.4.1",
+        "@mui/icons-material": "^6.4.2",
+        "@mui/material": "^6.4.2",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.2.0",
         "@testing-library/user-event": "^14.6.1",
@@ -87,7 +87,7 @@
     },
     "devDependencies": {
         "@electron/notarize": "^2.5.0",
-        "electron": "^34.0.1",
+        "electron": "^34.0.2",
         "electron-builder": "^25.1.8",
         "foreman": "^3.0.1"
     },
