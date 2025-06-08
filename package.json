@@ -87,7 +87,7 @@
     },
     "devDependencies": {
         "@electron/notarize": "^3.0.1",
-        "electron": "^36.3.2",
+        "electron": "^36.4.0",
         "electron-builder": "^26.0.12",
         "foreman": "^3.0.1"
     },
