@@ -1,11 +1,12 @@
 import { Button, ButtonGroup } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Clock from "./Clock";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import CloseIcon from "@mui/icons-material/Close";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import artnetLogo from "/artnetlogo.png";
 
 export default function Top() {
   const [consoleAddress, setConsoleAddress] = useState("");
@@ -248,7 +249,7 @@ export default function Top() {
       >
         <img
           style={{ maxHeight: "100%" }}
-          src={"atom://artnetlogo.png"}
+          src={artnetLogo}
           alt="artNet Logo"
         />
       </div>

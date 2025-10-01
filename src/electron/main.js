@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, protocol } = require('electron')
 const { join } = require('path')
 const { fork } = require('child_process')
-const URL = require('url')
 const { autoUpdater } = require('electron-updater');
 const EventEmitter = require('events');
 const myEmitter = new EventEmitter();
@@ -9,6 +8,11 @@ const path = require('path');
 
 const windowWidth = 300
 let win
+
+// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
 
 // SECOND INSTANCE
 const gotTheLock = app.requestSingleInstanceLock()
@@ -24,8 +28,12 @@ else {
 }
 // END SECOND INSTANCE
 
+// Updated path for artNetTc.js in Forge structure
+const artNetPath = app.isPackaged 
+  ? join(process.resourcesPath, 'artNetTc.js')
+  : join(__dirname, '..', '..', 'public', 'artNetTc.js')
 
-const artNet = fork(join(__dirname, 'artNetTc.js'), { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] })
+const artNet = fork(artNetPath, { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] })
 artNet.stdout.pipe(process.stdout)
 artNet.stderr.pipe(process.stdout)
 
@@ -47,18 +55,22 @@ const createWindow = () => {
         }
     })
 
-
-    const startUrl = process.env.ELECTRON_START_URL || URL.format({
-        pathname: join(__dirname, '/../build/index.html'),
-        protocol: 'file:',
-        slashes: true
-    });
-
-    win.loadURL(startUrl);
+    // In development, load from Vite dev server
+    // In production, load from built files
+    if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+        win.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+    } else {
+        win.loadFile(join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+    }
 
     // Emitted when the window is closed.
     win.on('closed', () => app.quit())
     win.on('ready-to-show', () => win.show())
+
+    // Open DevTools in development
+    if (!app.isPackaged) {
+        // win.webContents.openDevTools();
+    }
 }
 
 app.on('ready', () => {
