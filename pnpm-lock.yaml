@@ -59,13 +59,13 @@ importers:
         version: 7.10.2
       '@vitejs/plugin-react':
         specifier: ^5.0.4
-        version: 5.0.4(vite@7.1.10(@types/node@24.7.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+        version: 5.0.4(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
       electron:
-        specifier: ^38.2.2
-        version: 38.2.2
+        specifier: ^38.3.0
+        version: 38.3.0
       vite:
         specifier: 7.1.10
-        version: 7.1.10(@types/node@24.7.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+        version: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
 
 packages:
 
@@ -915,11 +915,17 @@ packages:
   '@types/mute-stream@0.0.4':
     resolution: {integrity: sha512-CPM9nzrCPPJHQNA9keH9CVkVI+WR5kMa+7XEs5jcGQ0VoAGnLv242w8lIVgwAEfmE4oufJRaTc9PNLQl0ioAow==}
 
+  '@types/node@22.18.10':
+    resolution: {integrity: sha512-anNG/V/Efn/YZY4pRzbACnKxNKoBng2VTFydVu8RRs5hQjikP8CQfaeAV59VFSCzKNp90mXiVXW2QzV56rwMrg==}
+
   '@types/node@22.18.8':
     resolution: {integrity: sha512-pAZSHMiagDR7cARo/cch1f3rXy0AEXwsVsVH09FcyeJVAzCnGgmYis7P3JidtTUjyadhTeSo8TgRPswstghDaw==}
 
   '@types/node@24.7.0':
     resolution: {integrity: sha512-IbKooQVqUBrlzWTi79E8Fw78l8k1RNtlDDNWsFZs7XonuQSJ8oNYfEeclhprUldXISRMLzBpILuKgPlIxm+/Yw==}
+
+  '@types/node@24.7.2':
+    resolution: {integrity: sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -1385,8 +1391,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@38.2.2:
-    resolution: {integrity: sha512-OXSaVNXDlonXDjMRsFNQo1j5tzTKwKXh5/m46IjAFccBcZJZMISI+EjSI07oexIuhvKM8AZLuFuihVn4YjWWrA==}
+  electron@38.3.0:
+    resolution: {integrity: sha512-Wij4AzX4SAV0X/ktq+NrWrp5piTCSS8F6YWh1KAcG+QRtNzyns9XLKERP68nFHIwfprhxF2YCN2uj7nx9DaeJw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -1480,8 +1486,8 @@ packages:
     resolution: {integrity: sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA==}
     engines: {node: '>=6'}
 
-  exponential-backoff@3.1.2:
-    resolution: {integrity: sha512-8QxYTVXUkuy7fIIoitQkPwGonB8F3Zj8eEO8Sqg9Zv/bkI7RJAzowee4gr81Hak/dUTpA2Z7VfQgoijjPNlUZA==}
+  exponential-backoff@3.1.3:
+    resolution: {integrity: sha512-ZgEeZXj30q+I0EN+CbSSpIyPaJ5HVQD18Z1m+u1FXbAeT94mr1zw50q4q6jiiC447Nl/YTcIYSAftiGqetwXCA==}
 
   external-editor@3.1.0:
     resolution: {integrity: sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew==}
@@ -3323,7 +3329,7 @@ snapshots:
   '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
     dependencies:
       env-paths: 2.2.1
-      exponential-backoff: 3.1.2
+      exponential-backoff: 3.1.3
       glob: 8.1.0
       graceful-fs: 4.2.11
       make-fetch-happen: 10.2.1
@@ -3986,11 +3992,19 @@ snapshots:
     dependencies:
       '@types/node': 24.7.0
 
+  '@types/node@22.18.10':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/node@22.18.8':
     dependencies:
       undici-types: 6.21.0
 
   '@types/node@24.7.0':
+    dependencies:
+      undici-types: 7.14.0
+
+  '@types/node@24.7.2':
     dependencies:
       undici-types: 7.14.0
 
@@ -4014,10 +4028,10 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 22.18.8
+      '@types/node': 22.18.10
     optional: true
 
-  '@vitejs/plugin-react@5.0.4(vite@7.1.10(@types/node@24.7.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
+  '@vitejs/plugin-react@5.0.4(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.4)
@@ -4025,7 +4039,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.38
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.1.10(@types/node@24.7.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vite: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -4562,10 +4576,10 @@ snapshots:
       - supports-color
     optional: true
 
-  electron@38.2.2:
+  electron@38.3.0:
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 22.18.8
+      '@types/node': 22.18.10
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -4676,7 +4690,7 @@ snapshots:
       signal-exit: 3.0.7
       strip-eof: 1.0.0
 
-  exponential-backoff@3.1.2: {}
+  exponential-backoff@3.1.3: {}
 
   external-editor@3.1.0:
     dependencies:
@@ -5051,7 +5065,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -5932,7 +5946,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite@7.1.10(@types/node@24.7.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
+  vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.10
       fdir: 6.5.0(picomatch@4.0.3)
@@ -5941,7 +5955,7 @@ snapshots:
       rollup: 4.52.4
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
       fsevents: 2.3.3
       jiti: 2.6.1
       terser: 5.44.0
