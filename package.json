@@ -1,51 +1,51 @@
 {
-    "name": "art-timecode-gen",
-    "version": "0.0.17",
-    "author": "Marece Williams",
-    "description": "ArtNet Timecode Generator",
-    "homepage": "./",
-    "main": ".vite/build/main.js",
-    "private": true,
-    "dependencies": {
-        "@emotion/react": "^11.14.0",
-        "@emotion/styled": "^11.14.1",
-        "@mui/icons-material": "^7.3.4",
-        "@mui/material": "^7.3.4",
-        "electron-squirrel-startup": "^1.0.1",
-        "electron-updater": "^6.6.2",
-        "nanotimer": "^0.3.15",
-        "react": "^19.2.0",
-        "react-dom": "^19.2.0"
-    },
-    "scripts": {
-        "start": "electron-forge start",
-        "build": "vite build",
-        "test": "echo \"No tests configured\" && exit 0",
-        "package": "electron-forge package",
-        "make": "electron-forge make",
-        "publish": "electron-forge publish",
-        "deploy": "electron-forge make --publish always",
-        "backup": "git add . && git commit -m %NPM_PACKAGE_VERSION% && git push origin main",
-        "upload": "pnpm build && pnpm backup && pnpm deploy",
-        "mac": "pnpm && pnpm build && pnpm deploy",
-        "try": "pnpm build && pnpm package",
-        "refresh": "pnpm upgrade --latest"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wbmmusic/art-timecode-gen.git"
-    },
-    "devDependencies": {
-        "@electron-forge/cli": "^7.10.0",
-        "@electron-forge/maker-deb": "^7.10.0",
-        "@electron-forge/maker-dmg": "^7.10.0",
-        "@electron-forge/maker-rpm": "^7.10.0",
-        "@electron-forge/maker-squirrel": "^7.10.0",
-        "@electron-forge/maker-zip": "^7.10.0",
-        "@electron-forge/plugin-vite": "^7.10.0",
-        "@vitejs/plugin-react": "^5.0.4",
-        "electron": "^38.2.2",
-        "vite": "^7.1.9"
-    },
-    "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
+  "name": "art-timecode-gen",
+  "version": "0.0.17",
+  "author": "Marece Williams",
+  "description": "ArtNet Timecode Generator",
+  "homepage": "./",
+  "main": ".vite/build/main.js",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.4",
+    "@mui/material": "^7.3.4",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.6.2",
+    "nanotimer": "^0.3.15",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "build": "vite build",
+    "test": "echo \"No tests configured\" && exit 0",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "deploy": "electron-forge make --publish always",
+    "backup": "git add . && git commit -m %NPM_PACKAGE_VERSION% && git push origin main",
+    "upload": "pnpm build && pnpm backup && pnpm deploy",
+    "mac": "pnpm && pnpm build && pnpm deploy",
+    "try": "pnpm build && pnpm package",
+    "refresh": "pnpm upgrade --latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wbmmusic/art-timecode-gen.git"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "7.10.2",
+    "@electron-forge/maker-deb": "7.10.2",
+    "@electron-forge/maker-dmg": "7.10.2",
+    "@electron-forge/maker-rpm": "7.10.2",
+    "@electron-forge/maker-squirrel": "7.10.2",
+    "@electron-forge/maker-zip": "7.10.2",
+    "@electron-forge/plugin-vite": "7.10.2",
+    "@vitejs/plugin-react": "^5.0.4",
+    "electron": "^38.2.2",
+    "vite": "7.1.10"
+  },
+  "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }
