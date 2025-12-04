@@ -9,13 +9,13 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.5",
-    "@mui/material": "^7.3.5",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
     "electron-squirrel-startup": "^1.0.1",
     "electron-updater": "^6.6.2",
     "nanotimer": "^0.3.15",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
   },
   "scripts": {
     "start": "electron-forge start",
@@ -45,7 +45,7 @@
     "@electron-forge/plugin-vite": "7.10.2",
     "@electron-forge/publisher-github": "7.10.2",
     "@vitejs/plugin-react": "^5.1.1",
-    "electron": "^39.2.4",
+    "electron": "^39.2.5",
     "vite": "7.2.6"
   },
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
