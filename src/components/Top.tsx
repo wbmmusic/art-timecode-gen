@@ -8,17 +8,19 @@ import StopIcon from "@mui/icons-material/Stop";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import artnetLogo from "/artnetlogo.png";
 
-export default function Top() {
-  const [consoleAddress, setConsoleAddress] = useState("");
-  const [frameRate, setFrameRate] = useState(30);
-  const [speed, setSpeed] = useState(1);
-  const [state, setState] = useState("stop");
-  const [output, setOutput] = useState(false);
+type State = "stop" | "run";
 
-  const handleConsoleAddress = e => {
+export default function Top() {
+  const [consoleAddress, setConsoleAddress] = useState<string>("");
+  const [frameRate, setFrameRate] = useState<number>(30);
+  const [speed, setSpeed] = useState<number>(1);
+  const [state, setState] = useState<State>("stop");
+  const [output, setOutput] = useState<boolean>(false);
+
+  const handleConsoleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newName = e.target.value;
     if (newName.length > 15) newName = newName.substring(0, 15);
-    newName = newName.replaceAll(/[^0-9.]/g, "");
+    newName = newName.replace(/[^0-9.]/g, "");
     let octets = newName.split(".");
     //console.log(octets)
     for (let i = 0; i < octets.length; i++) {
@@ -51,7 +53,7 @@ export default function Top() {
     setConsoleAddress(out);
   };
 
-  const ipIsValid = address => {
+  const ipIsValid = (address: string): boolean => {
     const octets = address.split(".");
     if (octets.length !== 4) return false;
     for (let i = 0; i < octets.length; i++) {
@@ -61,28 +63,28 @@ export default function Top() {
     return true;
   };
 
-  const handleChangeFrameRate = rate => {
+  const handleChangeFrameRate = (rate: number) => {
     if (rate === frameRate) return;
     window.electron
       .invoke("frameRate", rate)
-      .then(res => setFrameRate(res))
-      .catch(err => console.log(err));
+      .then((res: number) => setFrameRate(res))
+      .catch((err: Error) => console.log(err));
   };
 
-  const handleStateChange = newState => {
+  const handleStateChange = (newState: State) => {
     if (newState === state) return;
     window.electron
       .invoke("state", newState)
-      .then(res => setState(res))
-      .catch(err => console.log(err));
+      .then((res: State) => setState(res))
+      .catch((err: Error) => console.log(err));
   };
 
-  const handleSpeedChange = newSpeed => {
+  const handleSpeedChange = (newSpeed: number) => {
     if (newSpeed === speed) return;
     window.electron
       .invoke("speed", newSpeed)
-      .then(res => setSpeed(res))
-      .catch(err => console.log(err));
+      .then((res: number) => setSpeed(res))
+      .catch((err: Error) => console.log(err));
   };
 
   const RunStop = () => (
@@ -247,11 +249,7 @@ export default function Top() {
           top: "81px",
         }}
       >
-        <img
-          style={{ maxHeight: "100%" }}
-          src={artnetLogo}
-          alt="artNet Logo"
-        />
+        <img style={{ maxHeight: "100%" }} src={artnetLogo} alt="artNet Logo" />
       </div>
       <div
         style={{
@@ -272,13 +270,17 @@ export default function Top() {
         id="drawer"
         onMouseOver={() => {
           let exp = document.getElementById("expand");
-          exp.style.opacity = 0;
-          exp.style.transitionDelay = "0s";
+          if (exp) {
+            exp.style.opacity = "0";
+            exp.style.transitionDelay = "0s";
+          }
         }}
         onMouseOut={() => {
           let exp = document.getElementById("expand");
-          exp.style.opacity = 1;
-          exp.style.transitionDelay = "0.45s";
+          if (exp) {
+            exp.style.opacity = "1";
+            exp.style.transitionDelay = "0.45s";
+          }
         }}
       >
         <Speed />
@@ -315,8 +317,8 @@ export default function Top() {
               onClick={() => {
                 window.electron
                   .invoke("consoleAddress", consoleAddress)
-                  .then(res => setOutput(res))
-                  .catch(err => console.error(err));
+                  .then((res: boolean) => setOutput(res))
+                  .catch((err: Error) => console.error(err));
               }}
             >
               {output ? "Mute" : "Output"}

@@ -1,19 +1,19 @@
 "use strict";
-const { contextBridge, ipcRenderer } = require("electron");
-const { readFileSync } = require("fs");
-const { join } = require("path");
+const electron = require("electron");
+const fs = require("fs");
+const path = require("path");
 let version;
 try {
-  const packagePath = join(__dirname, "..", "..", "package.json");
-  const packageJson = JSON.parse(readFileSync(packagePath, "utf-8"));
+  const packagePath = path.join(__dirname, "..", "..", "package.json");
+  const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf-8"));
   version = packageJson.version;
 } catch (error) {
   version = "0.0.0";
 }
-contextBridge.exposeInMainWorld("electron", {
-  invoke: (a, b) => ipcRenderer.invoke(a, b),
-  send: (channel, args) => ipcRenderer.send(channel, args),
-  receive: (channel, func) => ipcRenderer.on(channel, (event, ...args) => func(...args)),
-  removeListener: (channel) => ipcRenderer.removeAllListeners(channel),
+electron.contextBridge.exposeInMainWorld("electron", {
+  invoke: (channel, ...args) => electron.ipcRenderer.invoke(channel, ...args),
+  send: (channel, ...args) => electron.ipcRenderer.send(channel, ...args),
+  receive: (channel, func) => electron.ipcRenderer.on(channel, (_event, ...args) => func(...args)),
+  removeListener: (channel) => electron.ipcRenderer.removeAllListeners(channel),
   ver: () => version
 });

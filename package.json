@@ -44,8 +44,12 @@
     "@electron-forge/maker-zip": "7.10.2",
     "@electron-forge/plugin-vite": "7.10.2",
     "@electron-forge/publisher-github": "7.10.2",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^5.1.2",
     "electron": "^39.2.7",
+    "typescript": "^5.7.3",
     "vite": "7.3.1"
   },
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"

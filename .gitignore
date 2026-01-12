@@ -12,6 +12,10 @@
 /build
 /dist
 /out
+/.vite
+
+# typescript
+*.tsbuildinfo
 
 # misc
 .DS_Store
