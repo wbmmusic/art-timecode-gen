@@ -15,7 +15,8 @@ const config: ForgeConfig = {
         appCopyright: 'WBM Tek',
         icon: './public/icon',
         extraResource: [
-            './public/artNetTc.js'
+            './public/artNetTc.js',
+            './public/icon.ico'
         ],
         asar: true,
         osxSign: {

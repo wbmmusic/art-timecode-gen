@@ -65,6 +65,7 @@ const createWindow = (): void => {
         frame: false,
         resizable: false,
         hasShadow: false,
+        icon: join(__dirname, 'icon.ico'),
         webPreferences: {
             preload: join(__dirname, 'preload.js'),
             sandbox: false,

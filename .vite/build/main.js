@@ -15340,6 +15340,7 @@ const createWindow = () => {
     frame: false,
     resizable: false,
     hasShadow: false,
+    icon: require$$1$1.join(__dirname, "icon.ico"),
     webPreferences: {
       preload: require$$1$1.join(__dirname, "preload.js"),
       sandbox: false

@@ -1,4 +1,7 @@
 import { defineConfig } from 'vite';
+import { builtinModules } from 'node:module';
+import { copyFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 // https://vitejs.dev/config
 export default defineConfig({
@@ -7,4 +10,20 @@ export default defineConfig({
         browserField: false,
         mainFields: ['module', 'jsnext:main', 'jsnext'],
     },
+    build: {
+        rollupOptions: {
+            external: [...builtinModules, 'electron'],
+        },
+    },
+    plugins: [
+        {
+            name: 'copy-icon',
+            writeBundle() {
+                copyFileSync(
+                    join(__dirname, 'public', 'icon.ico'),
+                    join(__dirname, '.vite', 'build', 'icon.ico')
+                );
+            },
+        },
+    ],
 });
