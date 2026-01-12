@@ -18,7 +18,7 @@
     "react-dom": "^19.2.3"
   },
   "scripts": {
-    "start": "electron-forge start",
+    "dev": "electron-forge start",
     "build": "vite build",
     "test": "echo \"No tests configured\" && exit 0",
     "package": "electron-forge package",

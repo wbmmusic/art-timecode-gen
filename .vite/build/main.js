@@ -1,1 +1,167 @@
-"use strict";const{app:s,BrowserWindow:w,ipcMain:d,protocol:y}=require("electron"),{join:u}=require("path"),{fork:g}=require("child_process"),{autoUpdater:i}=require("electron-updater"),q=require("events"),a=new q,v=require("path"),m=300;let n;require("electron-squirrel-startup")&&s.quit();const C=s.requestSingleInstanceLock();C?s.on("second-instance",()=>{n&&(n.isMinimized()&&n.restore(),n.focus())}):s.quit();const P=s.isPackaged?u(process.resourcesPath,"artNetTc.js"):u(__dirname,"..","..","public","artNetTc.js"),r=g(P,{stdio:["pipe","pipe","pipe","ipc"]});r.stdout.pipe(process.stdout);r.stderr.pipe(process.stdout);const p=()=>{n=new w({width:m,height:280,autoHideMenuBar:!0,show:!1,title:"ArtTimecode Gen v"+s.getVersion(),transparent:!0,frame:!1,resizable:!1,hasShadow:!1,webPreferences:{preload:u(__dirname,"preload.js"),sandbox:!1}}),n.loadFile(u(__dirname,"../renderer/main_window/index.html")),n.on("closed",()=>s.quit()),n.on("ready-to-show",()=>n.show()),s.isPackaged};s.on("ready",()=>{y.registerFileProtocol("atom",(e,t)=>{const l=e.url.substr(6);t({path:v.normalize(`${__dirname}/${l}`)})}),r.on("message",e=>{switch(e.cmd){case"time":try{n.webContents.send("time",e.clock)}catch{}break;case"rate":a.emit("rate",e.rate);break;case"state":a.emit("state",e.state);break;case"speed":a.emit("speed",e.speed);break;case"output":a.emit("output",e.output);break}}),r.on("error",e=>{console.log(e)}),r.on("close",(e,t)=>{console.log("CLOSED",e,t)}),d.on("reactIsReady",()=>{n.webContents.send("message","React Is Ready"),s.isPackaged&&(n.webContents.send("message","App is packaged"),i.on("error",e=>n.webContents.send("updater",e)),i.on("checking-for-update",()=>n.webContents.send("updater","checking-for-update")),i.on("update-available",e=>n.webContents.send("updater","update-available",e)),i.on("update-not-available",e=>n.webContents.send("updater","update-not-available",e)),i.on("download-progress",e=>n.webContents.send("updater","download-progress",e)),i.on("update-downloaded",e=>n.webContents.send("updater","update-downloaded",e)),d.on("installUpdate",()=>i.quitAndInstall()),setTimeout(()=>i.checkForUpdates(),3e3),setInterval(()=>i.checkForUpdates(),1e3*60*60))});const h=async e=>new Promise(async(t,l)=>{const o=c=>{a.removeListener("rate",o),t(c)};a.on("rate",o),r.send({cmd:"rate",rate:e})}),b=async e=>new Promise(async(t,l)=>{const o=c=>{a.removeListener("state",o),t(c)};a.on("state",o),r.send({cmd:"state",state:e})}),f=async e=>new Promise(async(t,l)=>{const o=c=>{a.removeListener("speed",o),t(c)};a.on("speed",o),r.send({cmd:"speed",speed:e})}),k=async e=>new Promise(async(t,l)=>{const o=c=>{a.removeListener("output",o),t(c)};a.on("output",o),r.send({cmd:"consoleAddress",address:e})});d.handle("consoleAddress",async(e,t)=>await k(t)),d.handle("frameRate",async(e,t)=>await h(t)),d.handle("state",async(e,t)=>await b(t)),d.handle("speed",async(e,t)=>await f(t)),d.on("time",(e,t)=>{r.send({cmd:"time",time:t})}),d.on("close",()=>s.quit()),d.on("min",()=>n.minimize()),d.on("contentHeight",(e,t)=>{n.setSize(m,Math.ceil(t)+2,!1)}),p(),s.on("activate",()=>{w.getAllWindows().length===0&&p()})});s.on("will-quit",()=>r.kill("SIGKILL"));s.on("window-all-closed",()=>{process.platform!=="darwin"&&s.quit()});
+"use strict";
+const { app, BrowserWindow, ipcMain, protocol } = require("electron");
+const { join } = require("path");
+const { fork } = require("child_process");
+const { autoUpdater } = require("electron-updater");
+const EventEmitter = require("events");
+const myEmitter = new EventEmitter();
+const path = require("path");
+const windowWidth = 300;
+let win;
+if (require("electron-squirrel-startup")) {
+  app.quit();
+}
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) app.quit();
+else {
+  app.on("second-instance", () => {
+    if (win) {
+      if (win.isMinimized()) win.restore();
+      win.focus();
+    }
+  });
+}
+const artNetPath = app.isPackaged ? join(process.resourcesPath, "artNetTc.js") : join(__dirname, "..", "..", "public", "artNetTc.js");
+const artNet = fork(artNetPath, { stdio: ["pipe", "pipe", "pipe", "ipc"] });
+artNet.stdout.pipe(process.stdout);
+artNet.stderr.pipe(process.stdout);
+const createWindow = () => {
+  win = new BrowserWindow({
+    width: windowWidth,
+    height: 280,
+    autoHideMenuBar: true,
+    show: false,
+    title: "ArtTimecode Gen v" + app.getVersion(),
+    transparent: true,
+    frame: false,
+    resizable: false,
+    hasShadow: false,
+    webPreferences: {
+      preload: join(__dirname, "preload.js"),
+      sandbox: false
+    }
+  });
+  {
+    win.loadURL("http://localhost:5173");
+  }
+  win.on("closed", () => app.quit());
+  win.on("ready-to-show", () => win.show());
+  if (!app.isPackaged) ;
+};
+app.on("ready", () => {
+  protocol.registerFileProtocol("atom", (request, callback) => {
+    const url = request.url.substr(6);
+    callback({ path: path.normalize(`${__dirname}/${url}`) });
+  });
+  artNet.on("message", (msg) => {
+    switch (msg.cmd) {
+      case "time":
+        try {
+          win.webContents.send("time", msg.clock);
+        } catch (error) {
+        }
+        break;
+      case "rate":
+        myEmitter.emit("rate", msg.rate);
+        break;
+      case "state":
+        myEmitter.emit("state", msg.state);
+        break;
+      case "speed":
+        myEmitter.emit("speed", msg.speed);
+        break;
+      case "output":
+        myEmitter.emit("output", msg.output);
+        break;
+    }
+  });
+  artNet.on("error", (err) => {
+    console.log(err);
+  });
+  artNet.on("close", (err, msg) => {
+    console.log("CLOSED", err, msg);
+  });
+  ipcMain.on("reactIsReady", () => {
+    win.webContents.send("message", "React Is Ready");
+    if (app.isPackaged) {
+      win.webContents.send("message", "App is packaged");
+      autoUpdater.on("error", (err) => win.webContents.send("updater", err));
+      autoUpdater.on("checking-for-update", () => win.webContents.send("updater", "checking-for-update"));
+      autoUpdater.on("update-available", (info) => win.webContents.send("updater", "update-available", info));
+      autoUpdater.on("update-not-available", (info) => win.webContents.send("updater", "update-not-available", info));
+      autoUpdater.on("download-progress", (info) => win.webContents.send("updater", "download-progress", info));
+      autoUpdater.on("update-downloaded", (info) => win.webContents.send("updater", "update-downloaded", info));
+      ipcMain.on("installUpdate", () => autoUpdater.quitAndInstall());
+      setTimeout(() => autoUpdater.checkForUpdates(), 3e3);
+      setInterval(() => autoUpdater.checkForUpdates(), 1e3 * 60 * 60);
+    }
+  });
+  const setRate = async (rate) => {
+    return new Promise(async (resolve, reject) => {
+      const handleRate = (newRate) => {
+        myEmitter.removeListener("rate", handleRate);
+        resolve(newRate);
+      };
+      myEmitter.on("rate", handleRate);
+      artNet.send({ cmd: "rate", rate });
+    });
+  };
+  const setState = async (state) => {
+    return new Promise(async (resolve, reject) => {
+      const handleState = (newState) => {
+        myEmitter.removeListener("state", handleState);
+        resolve(newState);
+      };
+      myEmitter.on("state", handleState);
+      artNet.send({ cmd: "state", state });
+    });
+  };
+  const setSpeed = async (speed) => {
+    return new Promise(async (resolve, reject) => {
+      const handleSpeed = (newSpeed) => {
+        myEmitter.removeListener("speed", handleSpeed);
+        resolve(newSpeed);
+      };
+      myEmitter.on("speed", handleSpeed);
+      artNet.send({ cmd: "speed", speed });
+    });
+  };
+  const setConsoleAddress = async (address) => {
+    return new Promise(async (resolve, reject) => {
+      const handleOutput = (newOut) => {
+        myEmitter.removeListener("output", handleOutput);
+        resolve(newOut);
+      };
+      myEmitter.on("output", handleOutput);
+      artNet.send({ cmd: "consoleAddress", address });
+    });
+  };
+  ipcMain.handle("consoleAddress", async (e, address) => {
+    return await setConsoleAddress(address);
+  });
+  ipcMain.handle("frameRate", async (e, rate) => {
+    return await setRate(rate);
+  });
+  ipcMain.handle("state", async (e, state) => {
+    return await setState(state);
+  });
+  ipcMain.handle("speed", async (e, speed) => {
+    return await setSpeed(speed);
+  });
+  ipcMain.on("time", (e, time) => {
+    artNet.send({ cmd: "time", time });
+  });
+  ipcMain.on("close", () => app.quit());
+  ipcMain.on("min", () => win.minimize());
+  ipcMain.on("contentHeight", (e, height) => {
+    win.setSize(windowWidth, Math.ceil(height) + 2, false);
+  });
+  createWindow();
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
+app.on("will-quit", () => artNet.kill("SIGKILL"));
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
+});

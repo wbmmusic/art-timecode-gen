@@ -1,1 +1,19 @@
-"use strict";const{contextBridge:t,ipcRenderer:n}=require("electron"),{readFileSync:c}=require("fs"),{join:i}=require("path");let o;try{const e=i(__dirname,"..","..","package.json");o=JSON.parse(c(e,"utf-8")).version}catch{o="0.0.0"}t.exposeInMainWorld("electron",{invoke:(e,r)=>n.invoke(e,r),send:(e,r)=>n.send(e,r),receive:(e,r)=>n.on(e,(a,...s)=>r(...s)),removeListener:e=>n.removeAllListeners(e),ver:()=>o});
+"use strict";
+const { contextBridge, ipcRenderer } = require("electron");
+const { readFileSync } = require("fs");
+const { join } = require("path");
+let version;
+try {
+  const packagePath = join(__dirname, "..", "..", "package.json");
+  const packageJson = JSON.parse(readFileSync(packagePath, "utf-8"));
+  version = packageJson.version;
+} catch (error) {
+  version = "0.0.0";
+}
+contextBridge.exposeInMainWorld("electron", {
+  invoke: (a, b) => ipcRenderer.invoke(a, b),
+  send: (channel, args) => ipcRenderer.send(channel, args),
+  receive: (channel, func) => ipcRenderer.on(channel, (event, ...args) => func(...args)),
+  removeListener: (channel) => ipcRenderer.removeAllListeners(channel),
+  ver: () => version
+});
