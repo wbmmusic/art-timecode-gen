@@ -101,7 +101,7 @@ export default function Updates() {
   return (
     <div>
       <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={downloadSnack.show}
         autoHideDuration={30000}
         onClose={handleClose}
@@ -109,7 +109,7 @@ export default function Updates() {
         action={action}
       />
       <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={installSnack.show}
         autoHideDuration={30000}
         onClose={handleClose}

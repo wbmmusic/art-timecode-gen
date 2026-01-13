@@ -1,13 +1,28 @@
-var NanoTimer = require(require('path').join(__dirname, 'app.asar', 'node_modules', 'nanotimer'));
-const dgram = require('dgram');
-const { Buffer } = require('buffer');
-let sender = dgram.createSocket('udp4');
+const NanoTimer = require('nanotimer');
+import * as dgram from 'dgram';
+import { Buffer } from 'buffer';
+
+interface DelayMap {
+    [key: number]: string;
+}
+
+interface ProcessMessage {
+    cmd: string;
+    address?: string;
+    speed?: number;
+    rate?: number;
+    state?: string;
+    time?: number[];
+    startTime?: number[];
+}
+
+let sender: dgram.Socket = dgram.createSocket('udp4');
 
 console.log('TOP OF CHILD');
 
 // Timer Stuff
-var frameTimer = new NanoTimer();
-const delays = {
+let frameTimer: any = new NanoTimer();
+const delays: DelayMap = {
     24: '41666666n',
     25: '40000000n',
     29.97: '33366666n',
@@ -15,31 +30,31 @@ const delays = {
 }
 
 // Clock Variables
-let hours = 0;
-let mins = 0
-let secs = 0;
-let frames = 0
-let framerate = 30
-let running = false
+let hours: number = 0;
+let mins: number = 0;
+let secs: number = 0;
+let frames: number = 0;
+let framerate: number = 30;
+let running: boolean = false;
 
 // Output Variables
-let consoleAddress = ''
-let output = false
-let speed = 1
-let startTime = [0, 0, 0, 0]
+let consoleAddress: string = '';
+let output: boolean = false;
+let speed: number = 1;
+let startTime: number[] = [0, 0, 0, 0];
 
 // artTimecode Packet Constants
-const opCodeHigh = 0x97
-const opCodeLow = 0
-const protVerLow = 14
-const protVerHigh = 0
-const id = new Buffer.from('Art-Net\0')
-const opCode = new Buffer.from([opCodeLow, opCodeHigh])
-const protVer = new Buffer.from([protVerHigh, protVerLow])
-const filler = new Buffer.from([0, 0])
-const header = Buffer.concat([id, opCode, protVer, filler])
+const opCodeHigh: number = 0x97;
+const opCodeLow: number = 0;
+const protVerLow: number = 14;
+const protVerHigh: number = 0;
+const id: Buffer = Buffer.from('Art-Net\0');
+const opCode: Buffer = Buffer.from([opCodeLow, opCodeHigh]);
+const protVer: Buffer = Buffer.from([protVerHigh, protVerLow]);
+const filler: Buffer = Buffer.from([0, 0]);
+const header: Buffer = Buffer.concat([id, opCode, protVer, filler]);
 
-let outBuffer = Buffer.alloc(19)
+let outBuffer: Buffer = Buffer.alloc(19);
 
 const makeTypeByte = () => {
     switch (framerate) {
@@ -60,19 +75,19 @@ const makeTypeByte = () => {
     }
 }
 
-const makeTimeBytes = () => {
-    return new Buffer.from([frames, secs, mins, hours, makeTypeByte()])
-}
+const makeTimeBytes = (): Buffer => {
+    return Buffer.from([frames, secs, mins, hours, makeTypeByte()]);
+};
 
-const addZero = (num) => {
-    if (num < 10) return '0' + num
-    return num
-}
+const addZero = (num: number): string => {
+    if (num < 10) return '0' + num.toString();
+    return num.toString();
+};
 
-const sendClockToFrontEnd = () => {
-    const clock = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate }
-    process.send({ cmd: 'time', clock })
-}
+const sendClockToFrontEnd = (): void => {
+    const clock = { time: `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}:${addZero(frames)}`, rate: framerate };
+    process.send?.({ cmd: 'time', clock });
+};
 
 const checkValidTime = () => {
     // Increment Seconds
@@ -114,13 +129,13 @@ const makeOutBuffer = () => {
     outBuffer = Buffer.concat([header, makeTimeBytes()])
 }
 
-const sendMsg = async () => {
-    return new Promise(async (resolve, reject) => {
-        sender.send(outBuffer, 6454, consoleAddress, () => resolve())
-    })
-}
+const sendMsg = async (): Promise<void> => {
+    return new Promise<void>((resolve) => {
+        sender.send(outBuffer, 6454, consoleAddress, () => resolve());
+    });
+};
 
-const sendFrame = async () => {
+const sendFrame = async() => {
     //console.log(outBuffer);
     if (output) await sendMsg()
     sendClockToFrontEnd()
@@ -136,19 +151,19 @@ const stopClock = () => {
 const startClock = () => {
     stopClock()
     running = true
-    frameTimer.setInterval(sendFrame, '', delays[framerate], function () {
+    frameTimer.setInterval(sendFrame, '', delays[framerate], function() {
         //frameTimer.clearInterval();
     });
 }
 
-const setFrameRate = (rate) => {
+const setFrameRate = (rate: number): number => {
     framerate = rate
     if (running) startClock()
     sendClockToFrontEnd()
     return framerate
 }
 
-const handleTime = (time) => {
+const handleTime = (time: number[]): void => {
     //console.log(time);
     hours = time[0]
     mins = time[1]
@@ -162,59 +177,59 @@ const handleTime = (time) => {
     console.log(hours, mins, secs, frames);
 }
 
-process.on('message', (msg) => {
+process.on('message', (msg: ProcessMessage) => {
     //console.log('Child got a message');
     switch (msg.cmd) {
 
         case 'consoleAddress':
             //console.log('Console Address In Child');
             if (output) {
-                output = false
-                consoleAddress = ''
+                output = false;
+                consoleAddress = '';
             } else {
-                consoleAddress = msg.address
-                output = true
+                consoleAddress = msg.address || '';
+                output = true;
             }
 
-            process.send({ cmd: 'output', output })
+            process.send?.({ cmd: 'output', output });
             break;
 
         case 'speed':
             //console.log('Speed Change', msg.speed);
-            speed = msg.speed
-            process.send({ cmd: 'speed', speed })
+            speed = msg.speed || 1;
+            process.send?.({ cmd: 'speed', speed });
             break;
 
         case 'rate':
             //console.log('Rate Change');
-            process.send({ cmd: 'rate', rate: setFrameRate(msg.rate) })
+            process.send?.({ cmd: 'rate', rate: setFrameRate(msg.rate || 30) });
             break;
 
         case 'state':
             //console.log('state Command', msg.state);
             if (msg.state === 'run') {
-                startClock()
+                startClock();
             } else if (msg.state === 'stop') {
-                stopClock()
+                stopClock();
                 // Reset to start time
-                hours = startTime[0]
-                mins = startTime[1]
-                secs = startTime[2]
-                frames = startTime[3]
-                sendClockToFrontEnd()
-                makeOutBuffer()
+                hours = startTime[0];
+                mins = startTime[1];
+                secs = startTime[2];
+                frames = startTime[3];
+                sendClockToFrontEnd();
+                makeOutBuffer();
             } else if (msg.state === 'pause') {
-                stopClock()
+                stopClock();
             }
-            process.send({ cmd: 'state', state: msg.state })
+            process.send?.({ cmd: 'state', state: msg.state });
             break;
 
         case 'time':
-            handleTime(msg.time)
+            if (msg.time) handleTime(msg.time);
             break;
 
         case 'startTime':
-            startTime = msg.startTime
+            startTime = msg.startTime || [0, 0, 0, 0];
             break;
 
         default:

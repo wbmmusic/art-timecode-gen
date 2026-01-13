@@ -1,0 +1,155 @@
+
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\ArtNet Timecode Generator.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\ArtNet Timecode Generator_ExecutionStub.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\dxcompiler.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\ffmpeg.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\libEGL.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\libGLESv2.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\squirrel.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\vk_swiftshader.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\vulkan-1.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\Update.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\out\\\\make\\\\squirrel.windows\\\\x64\\\\Setup.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\ArtNet Timecode Generator.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\ArtNet Timecode Generator_ExecutionStub.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\dxcompiler.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\ffmpeg.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\libEGL.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\libGLESv2.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\squirrel.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\vk_swiftshader.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\lib\\\\net45\\\\vulkan-1.dll\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\AppData\\\\Local\\\\SquirrelTemp\\\\tempn\\\\Update.exe\"]"
+]
+Successfully signed with result: undefined
+Called with: [
+  "C:\\Program Files\\nodejs\\node.exe",
+  "C:\\Users\\wbmmu\\Desktop\\electron\\electron-apps\\art-timecode\\art-timecode-gen\\node_modules\\electron-winstaller\\vendor\\receiver.mjs",
+  "{\"sha1\":\"b281b2c2413406e54ac73f3f3b204121b4a66e64\",\"hash\":\"sha256\",\"timestampServer\":\"http://timestamp.digicert.com\"}",
+  "[\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\node_modules\\\\electron-winstaller\\\\vendor\\\\signtool.exe\",\"sign\",\"windows-sign\",\"C:\\\\Users\\\\wbmmu\\\\Desktop\\\\electron\\\\electron-apps\\\\art-timecode\\\\art-timecode-gen\\\\out\\\\make\\\\squirrel.windows\\\\x64\\\\Setup.exe\"]"
+]
+Successfully signed with result: undefined

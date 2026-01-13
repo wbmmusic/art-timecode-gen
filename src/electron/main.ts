@@ -4,13 +4,15 @@ import { fork, ChildProcess } from 'child_process';
 import { autoUpdater } from 'electron-updater';
 import { EventEmitter } from 'events';
 import path from 'path';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+
 
 // Declare Vite global variables
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
 interface ArtNetMessage {
-    cmd: 'time' | 'rate' | 'state' | 'speed' | 'output' | 'consoleAddress';
+    cmd: 'time' | 'rate' | 'state' | 'speed' | 'output' | 'consoleAddress' | 'startTime';
     clock?: any;
     rate?: number;
     state?: string;
@@ -18,16 +20,62 @@ interface ArtNetMessage {
     output?: any;
     time?: any;
     address?: string;
+    startTime?: number[];
+}
+
+interface AppConfig {
+    consoleAddress: string;
+    frameRate: number;
+    speed: number;
+    output: boolean;
+    startTime: number[];
 }
 
 const myEmitter = new EventEmitter();
 const windowWidth = 300;
 let win: BrowserWindow | null = null;
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-    app.quit();
-}
+const defaultConfig: AppConfig = {
+    consoleAddress: '',
+    frameRate: 30,
+    speed: 1,
+    output: false,
+    startTime: [0, 0, 0, 0]
+};
+
+let configPath: string;
+let currentConfig: AppConfig = { ...defaultConfig };
+
+const loadConfig = (): AppConfig => {
+    try {
+        if (existsSync(configPath)) {
+            console.log('[Config] Loading config from:', configPath);
+            const data = readFileSync(configPath, 'utf8');
+            const loaded = { ...defaultConfig, ...JSON.parse(data) };
+            console.log('[Config] Loaded:', loaded);
+            return loaded;
+        } else {
+            console.log('[Config] No config file found, using defaults');
+        }
+    } catch (error) {
+        console.error('[Config] Failed to load config:', error);
+    }
+    console.log('[Config] Using default config:', defaultConfig);
+    return { ...defaultConfig };
+};
+
+const saveConfig = (config: AppConfig): void => {
+    try {
+        console.log('[Config] Saving config:', config);
+        writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
+        currentConfig = { ...config };
+        console.log('[Config] Config saved successfully to:', configPath);
+    } catch (error) {
+        console.error('[Config] Failed to save config:', error);
+    }
+};
+
+
 
 // SECOND INSTANCE
 const gotTheLock = app.requestSingleInstanceLock();
@@ -44,10 +92,10 @@ if (!gotTheLock) {
 }
 // END SECOND INSTANCE
 
-// Updated path for artNetTc.js in Forge structure
+// Updated path for artNetTc.js in resources
 const artNetPath = app.isPackaged
     ? join(process.resourcesPath, 'artNetTc.js')
-    : join(__dirname, '..', '..', 'public', 'artNetTc.js');
+    : join(__dirname, '..', '..', 'src', 'electron', 'artNetTc.js');
 
 const artNet: ChildProcess = fork(artNetPath, { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] });
 artNet.stdout?.pipe(process.stdout);
@@ -57,7 +105,7 @@ const createWindow = (): void => {
     // Create the browser window.
     win = new BrowserWindow({
         width: windowWidth,
-        height: 280,
+        height: 298,
         autoHideMenuBar: true,
         show: false,
         title: 'ArtTimecode Gen v' + app.getVersion(),
@@ -72,13 +120,27 @@ const createWindow = (): void => {
         },
     });
 
+
+
     // In development, load from Vite dev server
     // In production, load from built files
+    console.log('[DEBUG] MAIN_WINDOW_VITE_DEV_SERVER_URL:', MAIN_WINDOW_VITE_DEV_SERVER_URL);
+    console.log('[DEBUG] MAIN_WINDOW_VITE_NAME:', MAIN_WINDOW_VITE_NAME);
+    console.log('[DEBUG] __dirname:', __dirname);
+    console.log('[DEBUG] app.isPackaged:', app.isPackaged);
+
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+        console.log('[DEBUG] Loading from dev server:', MAIN_WINDOW_VITE_DEV_SERVER_URL);
         win.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     } else {
-        win.loadFile(join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+        const rendererPath = join(__dirname, '../dist/index.html');
+        console.log('[DEBUG] Loading from file:', rendererPath);
+        win.loadFile(rendererPath);
     }
+
+    win.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+        console.error('[DEBUG] Failed to load page:', errorCode, errorDescription, validatedURL);
+    });
 
     // Emitted when the window is closed.
     win.on('closed', () => app.quit());
@@ -86,11 +148,28 @@ const createWindow = (): void => {
 
     // Open DevTools in development
     if (!app.isPackaged) {
-        // win.webContents.openDevTools();
+        win.webContents.openDevTools({ mode: 'detach' });
     }
 };
 
 app.on('ready', () => {
+    configPath = join(app.getPath('userData'), 'config.json');
+    console.log('[Config] Config path:', configPath);
+    currentConfig = loadConfig();
+
+    // Initialize artNet with saved config
+    console.log('[Config] Initializing artNet with saved config');
+    artNet.send({ cmd: 'rate', rate: currentConfig.frameRate });
+    console.log('[Config] Set frameRate:', currentConfig.frameRate);
+    artNet.send({ cmd: 'speed', speed: currentConfig.speed });
+    console.log('[Config] Set speed:', currentConfig.speed);
+    artNet.send({ cmd: 'startTime', startTime: currentConfig.startTime });
+    console.log('[Config] Set startTime:', currentConfig.startTime);
+    if (currentConfig.output && currentConfig.consoleAddress) {
+        artNet.send({ cmd: 'consoleAddress', address: currentConfig.consoleAddress });
+        console.log('[Config] Set consoleAddress:', currentConfig.consoleAddress);
+    }
+
     protocol.registerFileProtocol('atom', (request, callback) => {
         const url = request.url.substr(6);
         callback({ path: path.normalize(`${__dirname}/${url}`) });
@@ -138,6 +217,10 @@ app.on('ready', () => {
     ipcMain.on('reactIsReady', () => {
         // console.log('React Is Ready')
         win?.webContents.send('message', 'React Is Ready');
+
+        // Send initial config to renderer
+        console.log('[Config] Sending config to renderer:', currentConfig);
+        win?.webContents.send('config', currentConfig);
 
         if (app.isPackaged) {
             win?.webContents.send('message', 'App is packaged');
@@ -215,12 +298,20 @@ app.on('ready', () => {
     };
 
     ipcMain.handle('consoleAddress', async (_e: IpcMainInvokeEvent, address: string) => {
-        return await setConsoleAddress(address);
+        console.log('[Config] consoleAddress changed to:', address);
+        const result = await setConsoleAddress(address);
+        currentConfig.consoleAddress = address;
+        currentConfig.output = result;
+        saveConfig(currentConfig);
+        return result;
     });
 
     ipcMain.handle('frameRate', async (_e: IpcMainInvokeEvent, rate: number) => {
-        // console.log('Rate Set to', rate);
-        return await setRate(rate);
+        console.log('[Config] frameRate changed to:', rate);
+        const result = await setRate(rate);
+        currentConfig.frameRate = result;
+        saveConfig(currentConfig);
+        return result;
     });
 
     ipcMain.handle('state', async (_e: IpcMainInvokeEvent, state: string) => {
@@ -228,7 +319,19 @@ app.on('ready', () => {
     });
 
     ipcMain.handle('speed', async (_e: IpcMainInvokeEvent, speed: number) => {
-        return await setSpeed(speed);
+        console.log('[Config] speed changed to:', speed);
+        const result = await setSpeed(speed);
+        currentConfig.speed = result;
+        saveConfig(currentConfig);
+        return result;
+    });
+
+    ipcMain.handle('startTime', async (_e: IpcMainInvokeEvent, startTime: number[]) => {
+        console.log('[Config] startTime changed to:', startTime);
+        currentConfig.startTime = startTime;
+        saveConfig(currentConfig);
+        artNet.send({ cmd: 'startTime', startTime });
+        return startTime;
     });
 
     ipcMain.on('time', (_e: IpcMainEvent, time: any) => {
@@ -237,8 +340,8 @@ app.on('ready', () => {
 
     ipcMain.on('close', () => app.quit());
     ipcMain.on('min', () => win?.minimize());
-    ipcMain.on('contentHeight', (_e: IpcMainEvent, height: number) => {
-        win?.setSize(windowWidth, Math.ceil(height) + 2, false);
+    ipcMain.on('setClickThrough', (_e: IpcMainEvent, enabled: boolean) => {
+        win?.setIgnoreMouseEvents(enabled, { forward: true });
     });
 
     createWindow();

@@ -1,21 +1,74 @@
 import { Button, ButtonGroup } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Clock from "./Clock";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import CloseIcon from "@mui/icons-material/Close";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
+import PauseIcon from "@mui/icons-material/Pause";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import artnetLogo from "/artnetlogo.png";
 
-type State = "stop" | "run";
+type State = "stop" | "run" | "pause";
 
-export default function Top() {
+interface AppConfig {
+  consoleAddress: string;
+  frameRate: number;
+  speed: number;
+  output: boolean;
+  startTime: number[];
+}
+
+interface TopProps {
+  drawerOpen: boolean;
+  setDrawerOpen: (open: boolean) => void;
+}
+
+export default function Top({ drawerOpen, setDrawerOpen }: TopProps) {
   const [consoleAddress, setConsoleAddress] = useState<string>("");
   const [frameRate, setFrameRate] = useState<number>(30);
   const [speed, setSpeed] = useState<number>(1);
   const [state, setState] = useState<State>("stop");
   const [output, setOutput] = useState<boolean>(false);
+  const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null);
+  const expandRef = useRef<HTMLDivElement>(null);
+  // startTime is used in config handler
+  const [, setStartTime] = useState<number[]>([0, 0, 0, 0]);
+
+  useEffect(() => {
+    const handleConfig = (config: AppConfig) => {
+      setConsoleAddress(config.consoleAddress);
+      setFrameRate(config.frameRate);
+      setSpeed(config.speed);
+      setOutput(config.output);
+      setStartTime(config.startTime);
+    };
+
+    window.electron.receive("config", handleConfig);
+    return () => window.electron.removeListener("config");
+  }, []);
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+    
+    const handleWindowMouseLeave = () => {
+      setDrawerOpen(false);
+      if (expandRef.current) {
+        expandRef.current.style.opacity = "1";
+        expandRef.current.style.transitionDelay = "0.45s";
+      }
+      if (closeTimeout) {
+        clearTimeout(closeTimeout);
+      }
+      const timeout = setTimeout(() => {
+        setCloseTimeout(null);
+      }, 450);
+      setCloseTimeout(timeout);
+    };
+
+    document.addEventListener('mouseleave', handleWindowMouseLeave);
+    return () => document.removeEventListener('mouseleave', handleWindowMouseLeave);
+  }, [drawerOpen, closeTimeout]);
 
   const handleConsoleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newName = e.target.value;
@@ -95,6 +148,14 @@ export default function Top() {
       >
         <StopIcon
           style={{ color: state === "stop" ? "red" : "", fontSize: "40px" }}
+        />
+      </div>
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => handleStateChange("pause")}
+      >
+        <PauseIcon
+          style={{ color: state === "pause" ? "yellow" : "", fontSize: "40px" }}
         />
       </div>
       <div
@@ -265,22 +326,54 @@ export default function Top() {
       >
         WBM Tek
       </div>
-      <div id="expand" />
+      <div
+        id="expand"
+        ref={expandRef}
+        onMouseOver={() => {
+          if (!drawerOpen) {
+            setDrawerOpen(true);
+          }
+        }}
+        onMouseLeave={() => {
+          if (drawerOpen) {
+            setDrawerOpen(false);
+            if (expandRef.current) {
+              expandRef.current.style.opacity = "1";
+              expandRef.current.style.transitionDelay = "0.45s";
+            }
+            const timeout = setTimeout(() => {
+              setCloseTimeout(null);
+            }, 450);
+            setCloseTimeout(timeout);
+          }
+        }}
+      />
       <div
         id="drawer"
         onMouseOver={() => {
-          let exp = document.getElementById("expand");
-          if (exp) {
-            exp.style.opacity = "0";
-            exp.style.transitionDelay = "0s";
+          // Cancel any pending close timeout
+          if (closeTimeout) {
+            clearTimeout(closeTimeout);
+            setCloseTimeout(null);
+          }
+          if (expandRef.current) {
+            expandRef.current.style.opacity = "0";
+            expandRef.current.style.transitionDelay = "0s";
+          }
+          if (!drawerOpen) {
+            setDrawerOpen(true);
           }
         }}
-        onMouseOut={() => {
-          let exp = document.getElementById("expand");
-          if (exp) {
-            exp.style.opacity = "1";
-            exp.style.transitionDelay = "0.45s";
+        onMouseLeave={() => {
+          setDrawerOpen(false);
+          if (expandRef.current) {
+            expandRef.current.style.opacity = "1";
+            expandRef.current.style.transitionDelay = "0.45s";
           }
+          const timeout = setTimeout(() => {
+            setCloseTimeout(null);
+          }, 450);
+          setCloseTimeout(timeout);
         }}
       >
         <Speed />
@@ -304,7 +397,12 @@ export default function Top() {
               Destination IP:
             </div>
             <input
-              style={{ width: "120px", marginLeft: "10px" }}
+              style={{
+                width: "120px",
+                marginLeft: "10px",
+                outline: "none",
+                border: "1px solid #ccc",
+              }}
               value={consoleAddress}
               onChange={handleConsoleAddress}
             />

@@ -26,6 +26,9 @@ importers:
       electron-updater:
         specifier: ^6.7.3
         version: 6.7.3
+      electron-window-state:
+        specifier: ^5.0.3
+        version: 5.0.3
       nanotimer:
         specifier: ^0.3.15
         version: 0.3.15
@@ -1511,6 +1514,10 @@ packages:
 
   electron-updater@6.7.3:
     resolution: {integrity: sha512-EgkT8Z9noqXKbwc3u5FkJA+r48jwZ5DTUiOkJMOTEEH//n5Am6wfQGz7nvSFEA2oIAMv9jRzn5JKTyWeSKOPgg==}
+
+  electron-window-state@5.0.3:
+    resolution: {integrity: sha512-1mNTwCfkolXl3kMf50yW3vE2lZj0y92P/HYWFBrb+v2S/pCka5mdwN3cagKm458A7NjndSwijynXgcLWRodsVg==}
+    engines: {node: '>=8.0.0'}
 
   electron-winstaller@5.4.0:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
@@ -4825,6 +4832,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  electron-window-state@5.0.3:
+    dependencies:
+      jsonfile: 4.0.0
+      mkdirp: 0.5.6
+
   electron-winstaller@5.4.0:
     dependencies:
       '@electron/asar': 3.4.1
@@ -5552,7 +5564,6 @@ snapshots:
   mkdirp@0.5.6:
     dependencies:
       minimist: 1.2.8
-    optional: true
 
   mkdirp@1.0.4: {}
 

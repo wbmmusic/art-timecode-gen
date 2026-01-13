@@ -1,194 +1,195 @@
 #theBody {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 30px;
-    font-weight: bold;
-    border-radius: 6px;
-    background: rgb(84, 84, 84);
-    overflow: hidden;
-    border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 6px;
+  background: rgb(84, 84, 84);
+  overflow: hidden;
+  border: 1px solid black;
 }
 
 body {
-    background: none;
-    overflow: hidden;
-    user-select: none;
-    font-family: Courier New, monospace;
+  overflow: hidden;
+  user-select: none;
+  font-family:
+    Courier New,
+    monospace;
 }
 
 .clockBody {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    background-color: black;
-    color: limeGreen;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: black;
+  color: limeGreen;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 .digitStyle {
-    width: 36px;
-    text-align: center;
-    white-space: nowrap;
-    color: inherit;
-    background-color: inherit;
-    border: none;
-    font-size: inherit;
-    font-family: inherit;
-    font-weight: bold;
-    text-align: center;
+  width: 36px;
+  text-align: center;
+  white-space: nowrap;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: bold;
+  text-align: center;
 }
 
 .frameRateDiv {
-    margin-left: 10px;
-    font-size: 13px;
-    font-weight: normal;
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: normal;
 }
 
 #drawer {
-    height: 0px;
-    overflow: hidden;
-    transition: height 0.25s ease-out;
-    transition-delay: 0.2s;
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.25s ease-out;
+  transition-delay: 0.2s;
+  border-radius: 0px 0px 6px 6px;
 }
 
 #drawer:hover {
-    height: 160px;
+  height: 160px;
 }
 
 .topRightButtons {
-    display: flex;
-    z-index: 5;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-    font-size: 16px;
-    background-color: silver;
-    position: absolute;
-    width: 10px;
-    padding: 2px;
-    right: 0;
-    top: 0;
-    opacity: 0;
-    cursor: default;
-    -webkit-app-region: no-drag;
-    border-radius: 5px;
+  display: flex;
+  z-index: 5;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  font-size: 16px;
+  background-color: silver;
+  position: absolute;
+  width: 10px;
+  padding: 2px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  cursor: default;
+  -webkit-app-region: no-drag;
+  border-radius: 5px;
 }
 
 .topRightButtons:hover {
-    opacity: 1;
-    transition: opacity 0.15s ease-in;
-    width: 50px;
+  opacity: 1;
+  transition: opacity 0.15s ease-in;
+  width: 50px;
 }
 
 .topBar {
-    height: 18px;
-    width: 100%;
-    display: flex;
+  height: 18px;
+  width: 100%;
+  display: flex;
 }
 
 .topBarDrag {
-    padding-left: 4px;
-    padding-top: 2px;
-    width: 100%;
-    color: silver;
-    font-size: 14px;
-    cursor: grab;
-    background: rgb(64, 64, 64);
-    -webkit-user-select: none;
-    -webkit-app-region: drag;
+  padding-left: 4px;
+  padding-top: 2px;
+  width: 100%;
+  color: silver;
+  font-size: 14px;
+  cursor: grab;
+  background: rgb(64, 64, 64);
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }
 
 .buttonsHover {
-    display: flex;
-    background-color: grey;
-    width: 20px;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-    font-weight: bold;
+  display: flex;
+  background-color: grey;
+  width: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .closeBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
-    background-color: grey;
-    padding: 5px;
-    transition: background-color 0.1s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background-color: grey;
+  padding: 5px;
+  transition: background-color 0.1s ease-in;
 }
 
 .closeBtn:hover {
-    background: red;
-    transition: background-color 0.1s ease-in;
+  background: red;
+  transition: background-color 0.1s ease-in;
 }
 
 .minBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
-    background-color: grey;
-    padding: 5px;
-    transition: background-color 0.1s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background-color: grey;
+  padding: 5px;
+  transition: background-color 0.1s ease-in;
 }
 
 .minBtn:hover {
-    background-color: white;
-    transition: background-color 0.1s ease-in;
+  background-color: white;
+  transition: background-color 0.1s ease-in;
 }
 
 #startStop {
-    position: relative;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 #expand {
-    width: 30%;
-    height: 8px;
-    background: rgb(130, 130, 130);
-    opacity: 1;
-    border-radius: 7px 7px 0px 0px;
-    transition: opacity .25s ease-in;
-    transition-delay: .5s;
+  width: 30%;
+  height: 8px;
+  background: rgb(130, 130, 130);
+  opacity: 1;
+  border-radius: 7px 7px 0px 0px;
+  transition: opacity 0.25s ease-in;
+  transition-delay: 0.5s;
+}
+
+#expand:hover + #drawer {
+  height: 160px;
+  transition: height 0.25s ease-out;
 }
 
 #expand:hover {
-    background: darkgrey;
-}
-
-#expand:hover+#drawer {
-    height: 160px;
-    transition: height 0.25s ease-out;
+  background: darkgrey;
 }
 
 .destDisplay {
-    font-size: 11px;
-    font-weight: normal;
-    background: black;
-    padding: 0px 5px;
+  font-size: 11px;
+  font-weight: normal;
+  background: black;
+  padding: 0px 5px;
 }
 
 .frDisplay {
-    font-size: 11px;
-    font-weight: normal;
-    background: black;
-    padding: 0px 5px;
-    color: limeGreen;
+  font-size: 11px;
+  font-weight: normal;
+  background: black;
+  padding: 0px 5px;
+  color: limeGreen;
 }
 
 .infoBar {
-    background: black;
-    display: flex;
-    width: 100%;
+  background: black;
+  display: flex;
+  width: 100%;
 }

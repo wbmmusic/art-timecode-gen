@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface ClockProps {
   state: string;
@@ -16,6 +16,7 @@ export default function Clock({ state }: ClockProps) {
     time: "00:00:00:00",
     rate: 30,
   });
+  const saveTimeoutRef = useRef<NodeJS.Timeout | undefined>();
   let timeArray = theTime.time.split(":");
 
   const handleInput = ({ type, value }: { type: TimeType; value: string }) => {
@@ -61,6 +62,13 @@ export default function Clock({ state }: ClockProps) {
 
     //console.log(`${type} changed to ${numArray}`);
     window.electron.send("time", numArray);
+    // Update startTime config when manually edited - debounced
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
+    saveTimeoutRef.current = setTimeout(() => {
+      window.electron.invoke("startTime", numArray);
+    }, 500);
   };
 
   useEffect(() => {

@@ -15,8 +15,8 @@ const config: ForgeConfig = {
         appCopyright: 'WBM Tek',
         icon: './public/icon',
         extraResource: [
-            './public/artNetTc.js',
-            './public/icon.ico'
+            './public/icon.ico',
+            './src/electron/artNetTc.js'
         ],
         asar: true,
         osxSign: {
@@ -78,7 +78,7 @@ const config: ForgeConfig = {
                     config: 'vite.main.config.ts',
                 },
                 {
-                    entry: 'src/electron/preload.ts',
+                    entry: 'public/preload.ts',
                     config: 'vite.preload.config.ts',
                 },
             ],
