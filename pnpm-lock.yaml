@@ -61,8 +61,8 @@ importers:
         specifier: 7.11.1
         version: 7.11.1
       '@types/node':
-        specifier: ^25.3.0
-        version: 25.3.0
+        specifier: ^25.3.3
+        version: 25.3.3
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
@@ -71,16 +71,16 @@ importers:
         version: 19.2.3(@types/react@19.2.14)
       '@vitejs/plugin-react':
         specifier: ^5.1.4
-        version: 5.1.4(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
+        version: 5.1.4(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
       electron:
-        specifier: ^40.6.0
-        version: 40.6.0
+        specifier: ^40.6.1
+        version: 40.6.1
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
       vite:
         specifier: 7.3.1
-        version: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2)
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2)
 
 packages:
 
@@ -1006,14 +1006,14 @@ packages:
   '@types/mute-stream@0.0.4':
     resolution: {integrity: sha512-CPM9nzrCPPJHQNA9keH9CVkVI+WR5kMa+7XEs5jcGQ0VoAGnLv242w8lIVgwAEfmE4oufJRaTc9PNLQl0ioAow==}
 
-  '@types/node@22.19.11':
-    resolution: {integrity: sha512-BH7YwL6rA93ReqeQS1c4bsPpcfOmJasG+Fkr6Y59q83f9M1WcBRHR2vM+P9eOisYRcN3ujQoiZY8uk5W+1WL8w==}
+  '@types/node@22.19.13':
+    resolution: {integrity: sha512-akNQMv0wW5uyRpD2v2IEyRSZiR+BeGuoB6L310EgGObO44HSMNT8z1xzio28V8qOrgYaopIDNA18YgdXd+qTiw==}
 
-  '@types/node@24.10.13':
-    resolution: {integrity: sha512-oH72nZRfDv9lADUBSo104Aq7gPHpQZc4BTx38r9xf9pg5LfP6EzSyH2n7qFmmxRQXh7YlUXODcYsg6PuTDSxGg==}
+  '@types/node@24.11.0':
+    resolution: {integrity: sha512-fPxQqz4VTgPI/IQ+lj9r0h+fDR66bzoeMGHp8ASee+32OSGIkeASsoZuJixsQoVef1QJbeubcPBxKk22QVoWdw==}
 
-  '@types/node@25.3.0':
-    resolution: {integrity: sha512-4K3bqJpXpqfg2XKGK9bpDTc6xO/xoUP/RBWS7AtRMug6zZFaRekiLzjVtAoZMquxoAbzBvy5nxQ7veS5eYzf8A==}
+  '@types/node@25.3.3':
+    resolution: {integrity: sha512-DpzbrH7wIcBaJibpKo9nnSQL0MTRdnWttGyE5haGwK86xgMOkFLp7vEyfQPGLOJh5wNYiJ3V9PmUMDhV9u8kkQ==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -1493,8 +1493,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@40.6.0:
-    resolution: {integrity: sha512-ett8W+yOFGDuM0vhJMamYSkrbV3LoaffzJd9GfjI96zRAxyrNqUSKqBpf/WGbQCweDxX2pkUCUfrv4wwKpsFZA==}
+  electron@40.6.1:
+    resolution: {integrity: sha512-u9YfoixttdauciHV9Ut9Zf3YipJoU093kR1GSYTTXTAXqhiXI0G1A0NnL/f0O2m2UULCXaXMf2W71PloR6V9pQ==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -2100,8 +2100,8 @@ packages:
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
-  minimatch@5.1.6:
-    resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
+  minimatch@5.1.9:
+    resolution: {integrity: sha512-7o1wEA2RyMP7Iu7GNba9vc0RWWGACJOCZBJX2GJWip0ikV+wcOsgVuY9uE8CPiyQhkGFSlhuSkZPavN7u1c2Fw==}
     engines: {node: '>=10'}
 
   minimatch@9.0.5:
@@ -2397,8 +2397,8 @@ packages:
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
-  pump@3.0.3:
-    resolution: {integrity: sha512-todwxLMY7/heScKmntwQG8CXVkWUOdYxIvY2s0VWAAMh/nd8SoYiRaKjlr7+iCs984f2P8zvrfWcDDYVb73NfA==}
+  pump@3.0.4:
+    resolution: {integrity: sha512-VS7sjc6KR7e1ukRFhQSY5LM2uBWAUPiOPa/A3mkKmiMwSmRFUITt0xuj+/lesgnCv+dPIEYlkzrcyXgquIHMcA==}
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -3754,7 +3754,7 @@ snapshots:
       '@inquirer/figures': 1.0.15
       '@inquirer/type': 2.0.0
       '@types/mute-stream': 0.0.4
-      '@types/node': 22.19.11
+      '@types/node': 22.19.13
       '@types/wrap-ansi': 3.0.0
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
@@ -4148,7 +4148,7 @@ snapshots:
 
   '@types/appdmg@0.5.5':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
     optional: true
 
   '@types/babel__core@7.20.5':
@@ -4176,7 +4176,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
       '@types/responselike': 1.0.3
 
   '@types/eslint-scope@3.7.7':
@@ -4193,7 +4193,7 @@ snapshots:
 
   '@types/fs-extra@9.0.13':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
     optional: true
 
   '@types/http-cache-semantics@4.0.4': {}
@@ -4202,21 +4202,21 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
 
   '@types/mute-stream@0.0.4':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
 
-  '@types/node@22.19.11':
+  '@types/node@22.19.13':
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.10.13':
+  '@types/node@24.11.0':
     dependencies:
       undici-types: 7.16.0
 
-  '@types/node@25.3.0':
+  '@types/node@25.3.3':
     dependencies:
       undici-types: 7.18.2
 
@@ -4238,16 +4238,16 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
 
   '@types/wrap-ansi@3.0.0': {}
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
     optional: true
 
-  '@vitejs/plugin-react@5.1.4(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))':
+  '@vitejs/plugin-react@5.1.4(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -4255,7 +4255,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-rc.3
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2)
+      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -4793,10 +4793,10 @@ snapshots:
       - supports-color
     optional: true
 
-  electron@40.6.0:
+  electron@40.6.1:
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 24.10.13
+      '@types/node': 24.11.0
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -5077,11 +5077,11 @@ snapshots:
 
   get-stream@4.1.0:
     dependencies:
-      pump: 3.0.3
+      pump: 3.0.4
 
   get-stream@5.2.0:
     dependencies:
-      pump: 3.0.3
+      pump: 3.0.4
 
   glob-parent@5.1.2:
     dependencies:
@@ -5103,7 +5103,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 5.1.6
+      minimatch: 5.1.9
       once: 1.4.0
 
   global-agent@3.0.0:
@@ -5282,7 +5282,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -5457,7 +5457,7 @@ snapshots:
     dependencies:
       brace-expansion: 1.1.12
 
-  minimatch@5.1.6:
+  minimatch@5.1.9:
     dependencies:
       brace-expansion: 2.0.2
 
@@ -5714,7 +5714,7 @@ snapshots:
       object-assign: 4.1.1
       react-is: 16.13.1
 
-  pump@3.0.3:
+  pump@3.0.4:
     dependencies:
       end-of-stream: 1.4.5
       once: 1.4.0
@@ -6174,7 +6174,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2):
+  vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2):
     dependencies:
       esbuild: 0.27.2
       fdir: 6.5.0(picomatch@4.0.3)
@@ -6183,7 +6183,7 @@ snapshots:
       rollup: 4.55.1
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.3.3
       fsevents: 2.3.3
       jiti: 2.6.1
       terser: 5.46.0
