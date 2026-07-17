@@ -50,7 +50,7 @@
     "@vitejs/plugin-react": "^6.0.3",
     "electron": "^43.1.1",
     "typescript": "^7.0.2",
-    "vite": "8.1.4"
+    "vite": "8.1.5"
   },
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }
