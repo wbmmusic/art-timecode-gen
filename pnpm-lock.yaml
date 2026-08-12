@@ -71,16 +71,19 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       '@vitejs/plugin-react':
         specifier: ^6.0.5
-        version: 6.0.5(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0))
+        version: 6.0.5(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))
       electron:
-        specifier: ^43.3.0
-        version: 43.3.0
+        specifier: ^43.4.0
+        version: 43.4.0
+      lodash:
+        specifier: 4.17.21
+        version: 4.17.21
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
       vite:
         specifier: 8.2.1
-        version: 8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0)
+        version: 8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)
 
 packages:
 
@@ -1504,8 +1507,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@43.3.0:
-    resolution: {integrity: sha512-nLlvu0WFjftWsSaTkV2B/c4NDuJBspTyXu8vKSQ6vLvFt8uG3NgN49LLKcXddwX0GqVvAQDhciWp+4xOdTdhew==}
+  electron@43.4.0:
+    resolution: {integrity: sha512-3qxGF0CeQbiox5oWV1JlbWGQ1VerbmDhTFqW4sJ8h7uqTHniFYPObXJcDna0DMh32et0fFyKzz0YY8lJv3t5jg==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -2103,6 +2106,9 @@ packages:
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
     deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
@@ -2856,8 +2862,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  terser@5.49.2:
-    resolution: {integrity: sha512-rGbJiKeQ4WDe3EXlDAIaQcwftVfv2Q8o1awFNfvXolJYKkb1AuZY1RTOmqx4LJXZENbWZA7eIsYGHuEzHsi1nQ==}
+  terser@5.50.0:
+    resolution: {integrity: sha512-CN9BVxWhgS/hRxtUMjtC2uRWSTcSfQFHMDWma6sKKfIivCD91sM+FOPfvwoaRMqCSrUpe1nv3jDamd9eEQ4y+w==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -3531,7 +3537,7 @@ snapshots:
       make-fetch-happen: 10.2.1
       nopt: 6.0.0
       proc-log: 2.0.1
-      semver: 7.8.1
+      semver: 7.8.5
       tar: 6.2.1
       which: 2.0.2
     transitivePeerDependencies:
@@ -4023,7 +4029,7 @@ snapshots:
   '@npmcli/fs@2.1.2':
     dependencies:
       '@gar/promisify': 1.1.3
-      semver: 7.8.1
+      semver: 7.8.5
 
   '@npmcli/move-file@2.0.1':
     dependencies:
@@ -4292,10 +4298,10 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  '@vitejs/plugin-react@6.0.5(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0))':
+  '@vitejs/plugin-react@6.0.5(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0)
+      vite: 8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)
 
   '@vscode/sudo-prompt@9.3.2': {}
 
@@ -4833,7 +4839,7 @@ snapshots:
       - supports-color
     optional: true
 
-  electron@43.3.0:
+  electron@43.4.0:
     dependencies:
       '@electron-internal/extract-zip': 1.0.5
       '@electron/get': 5.1.0
@@ -5455,6 +5461,8 @@ snapshots:
   lodash.get@4.4.2: {}
 
   lodash.isequal@4.5.0: {}
+
+  lodash@4.17.21: {}
 
   lodash@4.18.1:
     optional: true
@@ -6152,7 +6160,7 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  terser@5.49.2:
+  terser@5.50.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.18.0
@@ -6276,7 +6284,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0):
+  vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.5
@@ -6288,7 +6296,7 @@ snapshots:
       esbuild: 0.28.2
       fsevents: 2.3.3
       jiti: 2.7.0
-      terser: 5.49.2
+      terser: 5.50.0
       yaml: 2.9.0
 
   watchpack@2.5.1:
